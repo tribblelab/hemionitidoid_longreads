@@ -1,0 +1,86 @@
+---
+title: "software install notes"
+output: github_document
+date: 2025-10-22
+---
+
+# Software set-up notes for analyses
+
+## lilNASx data storage
+
+Location of data: `/var/services/NetBackup/hemionitid_PacBio/data`
+
+Transferring all the .tar datafiles to HYAK:
+```{bash}
+scp * laufran@klone.hyak.uw.edu:/mmfs1/gscratch/tribblelab/hemionitidoid_longreads
+```
+
+(done on the lab desktop so the transfer doesn't time out. as of 10-22-25, Globus isn't set up on the NAS, and `tmux` or `screen` commands aren't available)
+
+## Getting used to HYAK
+
+- Command to `ssh` in: `ssh laufran@klone.hyak.uw.edu`
+- Path to data storage for this project: `/mmfs1/gscratch/tribblelab/hemionitidoid_longreads`
+    - in the `/mmfs1/gscratch/tribblelab/` directory, we should be able to store 1TB of data ("Your lab gets 1 TB per slice that your group has contributed to klone, which includes HPC (CPU-only) and GPU slices." [source](https://hyak.uw.edu/docs/storage/gscratch))
+- In the above directory, git clone the PURC 2.0 bitbucket repo: `git clone https://bitbucket.org/peter_schafran/purc.git`
+
+### Finding our allocation
+
+```{bash}
+[laufran@klone-login03 basics]$ hyakalloc
+```
+
+      Account resources available to user: laufran       
+╭────────────┬───────────┬──────┬────────┬──────┬───────╮
+│    Account │ Partition │ CPUs │ Memory │ GPUs │       │
+├────────────┼───────────┼──────┼────────┼──────┼───────┤
+│ tribblelab │    cpu-g2 │   64 │   490G │    0 │ TOTAL │
+│            │           │    0 │     0G │    0 │ USED  │
+│            │           │   64 │   490G │    0 │ FREE  │
+╰────────────┴───────────┴──────┴────────┴──────┴───────╯
+ Checkpoint Resources  
+╭───────┬──────┬──────╮
+│       │ CPUs │ GPUs │
+├───────┼──────┼──────┤
+│ Idle: │ 3062 │   96 │
+╰───────┴──────┴──────╯
+
+great, our partition is for `cpu-g2`.
+
+to test out getting an interactive node with 1 CPU, 10GB memory max, 2 hours
+`salloc --partition=cpu-g2 --cpus-per-task=1 --mem=10G --time=2:00:00`
+
+### Setting up a container on HYAK 
+
+actually: might be able to do miniconda download & env setup instead of containerization.
+this isn't necessary below, but I'm keeping it just in case.
+
+dependencies needed for PURC 2.0: Python v.3+ and the PURC environment. Let's set up a Python container.
+
+following instructions from [here](https://hyak.uw.edu/docs/hyak101/containers/demonstration):
+
+```{bash}
+salloc --partition=cpu-g2 --cpus-per-task=1 --mem=10G --time=2:00:00
+cd /mmfs1/gscratch/scrubbed/laufran/basics
+apptainer pull docker://python:3.14.0-bookworm  # pull python 3.14 docker image
+apptainer shell python_3.14.0-bookworm.sif # open a shell inside the container where you can run Python
+python # open up our python instance
+```
+
+### Setting up conda env for PURC
+
+Doing this from the lab storage directory, as I might run out of storage in my home dir?
+
+```{bash}
+cd /mmfs1/gscratch/tribblelab/hemionitidoid_longreads
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh # download miniconda
+bash Miniconda3-latest-Linux-x86_64.sh -p ./miniconda3 # set up miniconda in this dir
+```
+
+log out of the ssh session & restart so the `conda` call works:
+```{bash}
+cd /mmfs1/gscratch/tribblelab/hemionitidoid_longreads
+conda env create -n purc --file purc/purc_linux.yaml 
+# this will take a minute, it's downloading all the dependencies
+conda activate purc
+```
