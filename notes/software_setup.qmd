@@ -131,3 +131,15 @@ conda activate purc
 to check on the amount of storage used, either in personal home directory 
 or in the lab directory, do: `hyakstorage`. 
 If you've recently deleted/added files, it updates every hour so might not be accurate. 
+
+### Setting up conda env for PacBio
+
+There is a command to convert .bam --> .fasta,
+using tools supported by PacBio, as set up by a conda env.
+However, they require Python 2.7, not 3.X+ (as above)
+
+```{bash}
+conda create -n pacbio python=2.7
+conda activate pacbio
+conda install -c bioconda pbtk
+```
