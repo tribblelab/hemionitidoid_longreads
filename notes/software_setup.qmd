@@ -10,18 +10,59 @@ date: 2025-10-22
 
 Location of data: `/var/services/NetBackup/hemionitid_PacBio/data`
 
-Transferring all the .tar datafiles to HYAK:
+So apparently, all the *.tar.partaa, *.tar.partab, etc. files are separated parts of the same tar.
+let's `cat` them back together then untar.
+
 ```{bash}
-scp * laufran@klone.hyak.uw.edu:/mmfs1/gscratch/tribblelab/hemionitidoid_longreads
+cat megaPent_Cell_1.tar.parta* | tar -xvf -
 ```
 
-(done on the lab desktop so the transfer doesn't time out. as of 10-22-25, Globus isn't set up on the NAS, and `tmux` or `screen` commands aren't available)
+(done on the lab desktop, so the command doesn't time out. 
+as of 10-27-25, `tmux` or `screen` commands aren't available)
+
+After untar'ing the files look like this:
+
+> barcodes.fasta
+> m64044_221017_183110.baz2bam_1.log
+> m64044_221017_183110.scraps.bam
+> m64044_221017_183110.scraps.bam.pbi
+> m64044_221017_183110.sts.xml
+> m64044_221017_183110.subreads
+> m64044_221017_183110.subreads.bam
+> m64044_221017_183110.subreads.bam.pbi
+> m64044_221017_183110.subreads.demux.json
+> m64044_221017_183110.subreads.demux.lima.counts
+> m64044_221017_183110.subreads.demux.lima.guess
+> m64044_221017_183110.subreads.demux.lima.report
+> m64044_221017_183110.subreads.demux.pentpoolA--pentpoolA.bam
+> m64044_221017_183110.subreads.demux.pentpoolA--pentpoolA.bam.pbi
+> m64044_221017_183110.subreads.demux.pentpoolA--pentpoolA.subreadset.xml
+> m64044_221017_183110.subreads.demux.pentpoolB--pentpoolB.bam
+> m64044_221017_183110.subreads.demux.pentpoolB--pentpoolB.bam.pbi
+> m64044_221017_183110.subreads.demux.pentpoolB--pentpoolB.subreadset.xml
+> m64044_221017_183110.subreads.demux.subreadset.xml
+> m64044_221017_183110.subreadset.xml
+> m64044_221017_183110.transferdone
+
+For more info on the file formats produced by PacBio,
+read [here](https://pacbio.gs.washington.edu/documents/Raw_Data_files.pdf) or [here](https://pacbiofileformats.readthedocs.io/en/13.0/BAM.html).
+
+Transferring the two .bam datafiles to HYAK:
+```{bash}
+scp m64044_221017_183110.subreads.demux.pentpoolA--pentpoolA.bam laufran@klone.hyak.uw.edu:/mmfs1/gscratch/tribblelab/hemionitidoid_longreads
+scp m64044_221017_183110.subreads.demux.pentpoolB--pentpoolB.bam laufran@klone.hyak.uw.edu:/mmfs1/gscratch/tribblelab/hemionitidoid_longreads
+```
+
+(as of 10-22-25, Globus isn't set up on the NAS)
 
 ## Getting used to HYAK
 
 - Command to `ssh` in: `ssh laufran@klone.hyak.uw.edu`
 - Path to data storage for this project: `/mmfs1/gscratch/tribblelab/hemionitidoid_longreads`
-    - in the `/mmfs1/gscratch/tribblelab/` directory, we should be able to store 1TB of data ("Your lab gets 1 TB per slice that your group has contributed to klone, which includes HPC (CPU-only) and GPU slices." [source](https://hyak.uw.edu/docs/storage/gscratch))
+    - in the `/mmfs1/gscratch/tribblelab/` directory, we should be able to store 1TB of data 
+    ("Your lab gets 1 TB per slice that your group has contributed to klone, 
+    which includes HPC (CPU-only) and GPU slices." 
+    [source](https://hyak.uw.edu/docs/storage/gscratch))
 - In the above directory, git clone the PURC 2.0 bitbucket repo: `git clone https://bitbucket.org/peter_schafran/purc.git`
 
 ### Finding our allocation
@@ -52,8 +93,9 @@ to test out getting an interactive node with 1 CPU, 10GB memory max, 2 hours
 
 ### Setting up a container on HYAK 
 
-actually: might be able to do miniconda download & env setup instead of containerization.
-this isn't necessary below, but I'm keeping it just in case.
+actually: can do miniconda download & env setup instead of containerization.
+this isn't necessary below, but I'm keeping it just in case anyone
+wants these instructions later.
 
 dependencies needed for PURC 2.0: Python v.3+ and the PURC environment. Let's set up a Python container.
 
@@ -69,7 +111,8 @@ python # open up our python instance
 
 ### Setting up conda env for PURC
 
-Doing this from the lab storage directory, as I might run out of storage in my home dir?
+Doing this from the lab storage directory, as I might run out of storage in my home dir
+installing miniconda there.
 
 ```{bash}
 cd /mmfs1/gscratch/tribblelab/hemionitidoid_longreads
@@ -84,3 +127,7 @@ conda env create -n purc --file purc/purc_linux.yaml
 # this will take a minute, it's downloading all the dependencies
 conda activate purc
 ```
+
+to check on the amount of storage used, either in personal home directory 
+or in the lab directory, do: `hyakstorage`. 
+If you've recently deleted/added files, it updates every hour so might not be accurate. 
