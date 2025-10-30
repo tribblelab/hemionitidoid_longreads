@@ -6,23 +6,46 @@ date: 2025-10-23
 
 # goal: run PURC 2.0 on Hemionitidoid longread (PacBio) data on the HYAK cluster.
 
+PURC: 
+    - uses model to remove PCR + sequencing errors, infers amplicon sequence variants (ASVs)
+      done with DADA2
+    - treats the conensus sequence of each cluster as an OTU
+    - PacBio long reads are critical here:
+        - short reads may be indistinguishable from each (sub)genome copy 
+        - basically they make a long circular strand of DNA, which can be read many times
+
 ## preparing files
 
-to start, we need to convert our .bam files to .fasta.
+### sequence data
+
+to start, we need to convert our .bam files from PacBio to .fastq.
+(.fasta is also acceptable, but can't do ASV stuff with .fasta)
+
 in the `/mmfs1/gscratch/tribblelab/hemionitidoid_longreads` dir:
 
 ```{bash}
 conda activate pacbio
-bam2fasta -o pentpoolA.fasta m64044_221017_183110.subreads.demux.pentpoolA--pentpoolA.bam
-bam2fasta -o pentpoolB.fasta m64044_221017_183110.subreads.demux.pentpoolB--pentpoolB.bam
+bam2fastq -o pentpoolA m64044_221017_183110.subreads.demux.pentpoolA--pentpoolA.bam
+bam2fastq -o pentpoolB m64044_221017_183110.subreads.demux.pentpoolB--pentpoolB.bam
 ```
 
-(10-28-25 11:18am this above still needs to be run, the transfer of .bam files isn't done yet)
+While the command only uses the .bam file as an argument, you will also need the .bam.pbi index file 
+for this command to run.
 
 ### barcode file
 
+needs to be in .fasta format, with the ID as barcode name, and barcode in 5'-3' direction.
+there is a dual barcode function, in which their names will be `XXX1` (F) and `XXX2` (R)
+
 ### ref seq file
 
+must be in .fasta format. headers must be of this format:
+`locus=ApP/group=A/ref_taxon=Cystopteris_bulbifera`
+where each field is separated by a forward slash.
+cannot exceed 50 characters (BLAST search will fail)
+
 ### map files
+
+tsv file. indicating which barcodes/groups go with each sample.
 
 ### config file
