@@ -47,10 +47,12 @@ After untar'ing the files look like this:
 For more info on the file formats produced by PacBio,
 read [here](https://pacbio.gs.washington.edu/documents/Raw_Data_files.pdf) or [here](https://pacbiofileformats.readthedocs.io/en/13.0/BAM.html).
 
-Transferring the two .bam datafiles to HYAK:
+Transferring the two .bam + .bam.pbi datafiles to HYAK:
 ```{bash}
 scp m64044_221017_183110.subreads.demux.pentpoolA--pentpoolA.bam laufran@klone.hyak.uw.edu:/mmfs1/gscratch/tribblelab/hemionitidoid_longreads
+scp m64044_221017_183110.subreads.demux.pentpoolA--pentpoolA.bam.pbi laufran@klone.hyak.uw.edu:/mmfs1/gscratch/tribblelab/hemionitidoid_longreads
 scp m64044_221017_183110.subreads.demux.pentpoolB--pentpoolB.bam laufran@klone.hyak.uw.edu:/mmfs1/gscratch/tribblelab/hemionitidoid_longreads
+scp m64044_221017_183110.subreads.demux.pentpoolB--pentpoolB.bam.pbi laufran@klone.hyak.uw.edu:/mmfs1/gscratch/tribblelab/hemionitidoid_longreads
 ```
 
 (as of 10-22-25, Globus isn't set up on the NAS)
