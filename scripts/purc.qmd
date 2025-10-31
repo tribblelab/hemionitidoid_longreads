@@ -16,6 +16,13 @@ PURC:
 
 ## preparing files
 
+to do list:
+[] create reference files (one for seq pool A, another for seq pool B)
+[] edit map files once I know who my reference groups will be?
+[] convert .bam --> .fastq
+[] edit config file
+[] write slurm script for running purc
+
 ### sequence data
 
 to start, we need to convert our .bam files from PacBio to .fastq.
@@ -24,6 +31,7 @@ to start, we need to convert our .bam files from PacBio to .fastq.
 in the `/mmfs1/gscratch/tribblelab/hemionitidoid_longreads` dir:
 
 ```{bash}
+salloc --partition=cpu-g2 --cpus-per-task=1 --mem=10G --time=5:00:00
 conda activate pacbio
 bam2fastq -o pentpoolA m64044_221017_183110.subreads.demux.pentpoolA--pentpoolA.bam
 bam2fastq -o pentpoolB m64044_221017_183110.subreads.demux.pentpoolB--pentpoolB.bam
@@ -47,5 +55,6 @@ cannot exceed 50 characters (BLAST search will fail)
 ### map files
 
 tsv file. indicating which barcodes/groups go with each sample.
+need a file for *each locus*! 
 
 ### config file
