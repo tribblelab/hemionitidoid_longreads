@@ -18,8 +18,11 @@ PURC:
 
 to do list:
 [] create reference files (one for seq pool A, another for seq pool B)
-[] edit map files once I know who my reference groups will be?
-[] convert .bam --> .fastq
+  [X] scrape NCBI seqs
+  [X] deal with edge case for plastomes --> is there a way to scrape specific genes?
+[x] edit map files to correct reference groups
+[X] convert .bam --> .fastq
+  [] decompress .fastq.qz (check size limits for hyak?)
 [] edit config file
 [] write slurm script for running purc
 
@@ -44,6 +47,8 @@ for this command to run.
 
 needs to be in .fasta format, with the ID as barcode name, and barcode in 5'-3' direction.
 there is a dual barcode function, in which their names will be `XXX1` (F) and `XXX2` (R)
+got the data from `Wefferling_barcoded_primers_2019.xlsx` file, just pasted it all in one file
+and formatted correctly. 
 
 ### ref seq file
 
@@ -52,9 +57,72 @@ must be in .fasta format. headers must be of this format:
 where each field is separated by a forward slash.
 cannot exceed 50 characters (BLAST search will fail)
 
+note: I have the `efetch` command available through setting up `edirect` locally a while ago... I'm assuming I set up edirect using [these directions](https://www.nlm.nih.gov/dataguide/edirect/install.html) for download
+
+code to scrape reference sequences from NCBI from a CSV that contains the codes for each sequence:
+(note: I manually copy + pasted the sequences if they came from full plastomes)
+```{julia}
+using DataFrames, CSV
+ncbidata = DataFrame(CSV.File("input/references.csv",stringtype=String)) #load df from CSV
+outputfile = "input/reference.fasta"
+open(outputfile, "w") do io
+  for row in eachrow(ncbidata)
+      spname = row.shortname
+      group = row.group_abbrev
+      gene = row.gene
+      header = ">locus=" * gene * "/group=" * group * "/ref_taxon=" * spname
+      #write header to .txt file
+      println(io, header)
+      id = row.NCBIcode
+      fullplastome = row.fullplastome
+      if !ismissing(id) && (!ismissing(fullplastome) && fullplastome == false)
+            tmpfile = tempname()
+            run(pipeline(`efetch -db nuccore -id $id -format fasta`, stdout = tmpfile))
+            #append the sequence (skipping the efetch header line)
+            for line in eachline(tmpfile)
+                if !startswith(line, ">")
+                    println(io, line)
+                end
+            end
+            rm(tmpfile; force = true)
+        #write empty line to file
+        println(io)
+      end
+      #write file out
+  end
+end
+```
+
+fixits from this file:
+[X] ones I have to grab from plastome
+[] 2 missing pentagramma genes --> build seqs from Keir files
+[] line breaks for seqs?
+[] check alignments in geneious to make sure sequences are mostly of similar length/overlap
+
+problems:
+  1. appefp-c: poor alignment, check the reverse complements?
+  2. cry2: good alignment, but Dory seq is much smaller than the other two. other non-Pent hem. similar length option is Gaga, but that doesn't share many SNPs with Dory visually
+  3. gapcpsh: big deletions / gaps between pent/noth vs. myri/parahemionitis ?
+  4. ibr3: myriopteris seq HUGE relative to others
+  10. sqd1: bad alignment
+
+fixed:
+  8. psbm: notholaena- bad annotation??? I manually found correct seq
+  should maybe go see what annotation for seq I pulled is???
+
+no problems:
+  5. infa: amazing, no notes
+  6. matk: amazing, no notes
+  7. pgic: amazing, no notes
+  9. rpl2: amazing, no notes
+
 ### map files
 
 tsv file. indicating which barcodes/groups go with each sample.
-need a file for *each locus*! 
+need a file for *each locus*!
+I made an excel sheet `pentagramma_sampling_lauren.xlsx` that cleaned up
+the formatting and with some sorting / hiding of columns, I was able to paste what I 
+needed to make each individual file. (ok, could be more efficient doing this maybe if I wrote
+some code, but wasn't terrible by hand)
 
 ### config file
