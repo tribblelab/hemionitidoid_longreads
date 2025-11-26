@@ -1,0 +1,74 @@
+***Important ones***
+[Files]
+Input_sequence_file		= PacBio_seq.fasta	    # Fasta file containing your sequencing reads
+in_Barcode_seq_file		= barcodes.fasta		# Fasta file containing barcode names and sequences; the input for making blast database
+in_RefSeq_seq_file		= reference.fasta	    # Fasta file containing reference names and sequences; the input for making blast database
+Output_prefix			= poolA					# The prefix for output files
+Output_folder			= purc_poolA			# The folder in where all purc output will be saved
+Log_file				= log					# If left empty, default time-stamped log file name will be used
+
+[Loci]
+Locus_name				= matK, pgiC, APPEFP, CRY2, gapCpSh, SQD1, rpl2, psbM, infA, IBR3	# The order must be identical to that in Locus-barcode-taxon_map
+Locus-barcode-taxon_map	= matk_A.txt, pgic_A.txt, appepf_A.txt, cry2_A.txt, gap_A.txt, sqd1_A.txt, rpl2_A.txt, psbm_A.txt, infa_A.txt, ibr3_A.txt
+
+[Primers]
+Forward_primer			= GGAGTACAGTGGCAATCAAACG, CTCGACAACAGGTCACGGTGG, ATGAAATGCACAGYAGTCCAGG, GGAGCTCCCCTTGTCATGCG, CMGCRGATGCTCCAATGTTC, GTTCATTCTATCATCTTAGCAAAGTGCATG, GTATGACCCCAACCGCAATGC, GTTATTCCGAGCGGCTGTTTG, CTTATATAACTGCGTCAGATCCTTCCCG, ACCGAACCTGATGTCGCATC # 5'-3' Order must match locus_name and locus-barcode-taxon_map!
+Reverse_primer			= TCATCTGTTAAAGTAGCCCAGGCTG, GAARCTGCCACCAATTCCAATAGC, ACTCTGTATAGATACACCCCAGGGC, GCCTTCCTTAACCCATAACACCTGC, CCACAAAGTCGTTCGACACG, GTCCCTGATGTCAAGGTATCCTCTTG, TACTAAACGAATTTCGCCGGAAGG, GAAGTTGCGGGTTCGAGACC, CGGTCCAGTAGCAAGAGAATTGAGG, TGCTCAATGTCCAACCGGC # 5'-3' Order must match locus_name and locus-barcode-taxon_map!
+
+***Setting up PURC run***
+[PPP_Configuration]
+Mode					= 0		# 0: Check concatemers and then full run
+								# 1: Skip concatemer-checking
+								# 2: End purc after annotation, without doing clustering
+Multiplex_per_barcode	= 1		# 0: Each barcode contains only one sample
+								# 1: Each barcode contains multiple samples
+Dual_barcode			= 0		# 0: Barcodes only on one primer
+								# 1: Unique barcodes on both primers
+								# 2: Same barcode on both primers
+Barcode_detection		= 1		# 0: Search barcode in entire sequences; will produce "ErrMidBC" flag if barcodes are not at the ends of the sequence
+								# 1: Search barcode only at the ends of sequences
+Recycle_chimeric_seq	= 0		# 0: Do not recycle
+								# 1: Split chimeric sequences into respective locus
+Recycle_no_barcoded_seq	= 0		# 0: Do not recycle
+								# 1: Use Smith-Waterman local alignment (more sensitive) to find barcodes in those sequences that BLAST failed to detect barcode
+Clustering_method = 1		# 0: Use DADA2 ASV inference
+												# 1: Use Vsearch OTU clustering
+												# 2: Use both clustering methods
+Align					= 1		# 0: No aligning attempted. 1: Final consensus sequences will be aligned with MUSCLE
+
+***Miscellaneous***
+[DADA Filtering Parameters]
+minLen				= 0	# The minimum length to retain a read (leave as 0 to use Tukey's outlier test)
+maxLen				= 0	# The maximum length to retain a read (leave as 0 to use Tukey's outlier test)
+maxEE				= 5 #  After truncation, reads with higher than maxEE "expected errors" will be discarded.
+Use_OTU_priors = FALSE # Set to TRUE to use OTU output sequences as priors for ASV inference; only compatible with Clustering_method = 2 (default FALSE)
+
+[Clustering Parameters]
+clustID1				= 0.997 	# The similarity criterion for the initial VSEARCH clustering
+clustID2 				= 0.995 	# The similarity criterion for the second clustering
+clustID3 				= 0.990 	# The similarity criterion for the third clustering
+clustID4 				= 0.997 	# The similarity criterion for the FINAL clustering to remove identical/near identical clusters
+sizeThreshold1			= 1 		# The min. number of sequences/cluster necessary for that cluster to be retained (set to 2 to remove singletons, 3 to remove singletons and doubles, etc)
+sizeThreshold2 			= 4			# The min. number of sequences/cluster necessary for that cluster to be retained (set to 2 to remove singletons, 3 to remove singletons and doubles, etc)
+
+[Chimera-killing Parameters]
+abundance_skew			= 1.9
+
+[Lima Override]
+Lima_override = 0 # Set to 1 to use BLAST-based demultiplexing instead of Lima (Linux only)
+
+[Dependencies] # by default assumed to be available in the shell's PATH
+Vsearch 				= vsearch								# The name of (or path to) Vsearch executable
+Cutadapt				= cutadapt								# The name of (or path to) Cutadapt executable
+MAFFT 					= mafft								# The name of (or path to) MAFFT executable
+Rscript					= Rscript								# The name of (or path to) Rscript executable
+blastn 					= blastn								# The name of (or path to) blastn executable
+
+
+[Miscellaneous]
+Threads					= 8						# The number of threads for running BLAST
+Verbose_level 			= 2						# 0: quiet, 1: noticeable (only uchime+cutadapt output), 2: annoying (all usearch+cutadapt+muscle output)
+Remove_intermediates	= 0						# 0: keep all the intermediate files, 1: remove intermediate files
+Barcode_blastDB			= barcode_blastdb		# The name of the barcode blast database
+RefSeq_blastDB			= refseq_blastdb		# The name of the reference sequence blast database
+seq_name_toErase		= 						# Remove this from sequence names
