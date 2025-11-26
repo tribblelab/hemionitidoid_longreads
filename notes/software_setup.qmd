@@ -117,14 +117,14 @@ Doing this from the lab storage directory, as I might run out of storage in my h
 installing miniconda there.
 
 ```{bash}
-cd /mmfs1/gscratch/tribblelab/hemionitidoid_longreads
+cd /mmfs1/gscratch/tribblelab/laufran
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh # download miniconda
 bash Miniconda3-latest-Linux-x86_64.sh -p ./miniconda3 # set up miniconda in this dir
 ```
 
 log out of the ssh session & restart so the `conda` call works:
 ```{bash}
-cd /mmfs1/gscratch/tribblelab/hemionitidoid_longreads
+cd /mmfs1/gscratch/tribblelab/laufran
 conda env create -n purc --file purc/purc_linux.yaml 
 # this will take a minute, it's downloading all the dependencies
 conda activate purc
