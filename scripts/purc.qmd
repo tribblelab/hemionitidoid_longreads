@@ -22,8 +22,8 @@ to do list:
   [X] deal with edge case for plastomes --> is there a way to scrape specific genes?
 [x] edit map files to correct reference groups
 [X] convert .bam --> .fastq
-  [] decompress .fastq.qz (check size limits for hyak?)
-[] edit config file
+  [X] decompress .fastq.qz (check size limits for hyak?)
+[X] edit config file
 [] write slurm script for running purc
 
 ### sequence data
@@ -42,6 +42,12 @@ bam2fastq -o pentpoolB m64044_221017_183110.subreads.demux.pentpoolB--pentpoolB.
 
 While the command only uses the .bam file as an argument, you will also need the .bam.pbi index file 
 for this command to run.
+
+Note: I ran this initially on an interactive node, but it timed out.
+Instead, ran as a slurm job via [`scripts/bamtofastq.slurm`](`bamtofastq.slurm`)
+
+The bam2fastq conversion results in a .gz compressed file. I uncompressed using
+via [`scripts/gzdecompression.slurm`](`gzdecompression.slurm`)
 
 ### barcode file
 
@@ -101,19 +107,19 @@ fixits from this file:
 
 problems:
   1. appefp-c: poor alignment, check the reverse complements?
-  2. cry2: good alignment, but Dory seq is much smaller than the other two. other non-Pent hem. similar length option is Gaga, but that doesn't share many SNPs with Dory visually
+  2. cry2: replacing Dory (available on NCBI) for Gaga, since our Dory samples didn't amplify cry2 at all. but the Pent cry2 ref sequence is proving a small problem.. from the sanger data, none of the forward primers seemed to work well. and reverse primers give maybe ~500bp/2,000bp, which is better than nothing.
   3. gapcpsh: big deletions / gaps between pent/noth vs. myri/parahemionitis ?
-  4. ibr3: myriopteris seq HUGE relative to others
+  7. pgic: beautiful alignment, just need to add in penta
   10. sqd1: bad alignment
 
 fixed:
-  8. psbm: notholaena- bad annotation??? I manually found correct seq
+  4. ibr3: original myriopteris seq was HUGE relative to others, I pulled a smaller one (M. aurea, MN876455.1) it aligned much better.
+  8. psbm: notholaena- bad annotation on full plastome on ncbi??? I manually found correct seq.
   should maybe go see what annotation for seq I pulled is???
 
 no problems:
   5. infa: amazing, no notes
   6. matk: amazing, no notes
-  7. pgic: amazing, no notes
   9. rpl2: amazing, no notes
 
 ### map files
