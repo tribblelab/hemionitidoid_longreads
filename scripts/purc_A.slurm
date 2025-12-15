@@ -6,8 +6,9 @@
 
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
-#SBATCH --mem=480G
-#SBATCH --time=48:00:00
+#SBATCH --cpus-per-task=8
+#SBATCH --mem=32G
+#SBATCH --time=24:00:00
 
 #SBATCH --array=1-85
 #SBATCH --chdir=/mmfs1/gscratch/tribblelab/hemionitidoid_longreads
