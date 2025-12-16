@@ -21,8 +21,8 @@ conda activate purc
 # ------------------------------------------------------------
 # User settings
 # ------------------------------------------------------------
-BASE_CONFIG="input/purc_configuration_A.txt"
-BATCH_DIR_PARENT="poolafastq"
+BASE_CONFIG="/mmfs1/gscratch/tribblelab/hemionitidoid_longreads/input/purc_configuration_A.txt"
+BATCH_DIR_PARENT="/mmfs1/gscratch/tribblelab/hemionitidoid_longreads/input/poolafastq"
 PYTHON="/mmfs1/gscratch/tribblelab/laufran/purc/purc.py"
 
 # Each array index corresponds to one batch folder.
@@ -36,9 +36,9 @@ BATCH_FOLDER="${BATCH_DIR_PARENT}/batch_${BATCH_NUM}"
 INPUT_FASTQ="${BATCH_FOLDER}/reads.fastq"
 
 # Output naming derived from batch
-OUT_PREFIX="poolA_b${BATCH_NUM}"
-OUT_DIR="purc_poolA_b${BATCH_NUM}"
-CONFIG_OUT="purc_config_b${BATCH_NUM}.conf"
+OUT_PREFIX="output/poolA_b${BATCH_NUM}"
+OUT_DIR="output/purc_poolA_b${BATCH_NUM}"
+CONFIG_OUT="${BATCH_FOLDER}/purc_config_b${BATCH_NUM}.conf"
 
 echo "Running PURC for batch ${BATCH_NUM}"
 echo "Input FASTQ: ${INPUT_FASTQ}"
