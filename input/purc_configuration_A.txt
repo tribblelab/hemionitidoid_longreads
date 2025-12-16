@@ -9,7 +9,7 @@ Log_file				= log					# If left empty, default time-stamped log file name will b
 
 [Loci]
 Locus_name				= matK, pgiC, APPEFP, CRY2, gapCpSh, SQD1, rpl2, psbM, infA, IBR3	# The order must be identical to that in Locus-barcode-taxon_map
-Locus-barcode-taxon_map	= matk_A.txt, pgic_A.txt, appepf_A.txt, cry2_A.txt, gap_A.txt, sqd1_A.txt, rpl2_A.txt, psbm_A.txt, infa_A.txt, ibr3_A.txt
+Locus-barcode-taxon_map	= mapfiles/matk_A.txt, mapfiles/pgic_A.txt, mapfiles/appepf_A.txt, mapfiles/cry2_A.txt, mapfiles/gap_A.txt, mapfiles/sqd1_A.txt, mapfiles/rpl2_A.txt, mapfiles/psbm_A.txt, mapfiles/infa_A.txt, mapfiles/ibr3_A.txt
 
 [Primers]
 Forward_primer			= GGAGTACAGTGGCAATCAAACG, CTCGACAACAGGTCACGGTGG, ATGAAATGCACAGYAGTCCAGG, GGAGCTCCCCTTGTCATGCG, CMGCRGATGCTCCAATGTTC, GTTCATTCTATCATCTTAGCAAAGTGCATG, GTATGACCCCAACCGCAATGC, GTTATTCCGAGCGGCTGTTTG, CTTATATAACTGCGTCAGATCCTTCCCG, ACCGAACCTGATGTCGCATC # 5'-3' Order must match locus_name and locus-barcode-taxon_map!
