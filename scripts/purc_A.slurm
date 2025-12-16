@@ -15,13 +15,13 @@
 #SBATCH --export=ALL
 #SBATCH -o log/%x_%A_%a.out
 
-conda init
+module load conda
 conda activate purc
 
 # ------------------------------------------------------------
 # User settings
 # ------------------------------------------------------------
-BASE_CONFIG="scripts/purc_configuration_A.txt"
+BASE_CONFIG="input/purc_configuration_A.txt"
 BATCH_DIR_PARENT="poolafastq"
 PYTHON="/mmfs1/gscratch/tribblelab/laufran/purc/purc.py"
 
