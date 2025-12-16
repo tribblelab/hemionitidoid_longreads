@@ -17,14 +17,12 @@ PURC:
 ## preparing files
 
 to do list:
-[] create reference files (one for seq pool A, another for seq pool B)
-  [X] scrape NCBI seqs
-  [X] deal with edge case for plastomes --> is there a way to scrape specific genes?
-[x] edit map files to correct reference groups
-[X] convert .bam --> .fastq
-  [X] decompress .fastq.qz (check size limits for hyak?)
-[X] edit config file
-[] write slurm script for running purc
+[] send pics of weird alignments to slack
+[] make a dummy run -->
+  [] new config
+  [] new bash script
+  [] new reference file
+  [] new map
 
 ### sequence data
 
@@ -48,6 +46,40 @@ Instead, ran as a slurm job via [`scripts/bamtofastq.slurm`](`bamtofastq.slurm`)
 
 The bam2fastq conversion results in a .gz compressed file. I uncompressed using
 via [`scripts/gzdecompression.slurm`](`gzdecompression.slurm`)
+
+but my files are too huge, I'll have to split into batches of 2 million reads each:
+```{bash}
+input="pentpoolA.fastq"
+parent="poolafastq"
+mkdir -p "$parent"
+
+# Split FASTQ into batches of 2M reads (8M lines)
+awk -v parent="$parent" '
+BEGIN { batch_size = 8000000 }  # 2 million reads × 4 lines
+{
+    file_num = int((NR-1)/batch_size) + 1
+    folder = sprintf("%s/batch_%03d", parent, file_num)
+    fname = folder "/reads.fastq"
+
+    # Create folder at the first line of the batch
+    if (NR % batch_size == 1) {
+        system("mkdir -p " folder)
+    }
+
+    print >> fname
+}
+' "$input"
+
+# Only delete input if AWK succeeded
+if [ $? -eq 0 ]; then
+    echo "Splitting complete. Deleting input FASTQ..."
+    rm -f "$input"
+else
+    echo "Error occurred; input file was NOT deleted."
+fi
+```
+
+fixit: will eventually have to do for pool B.
 
 ### barcode file
 
@@ -132,3 +164,10 @@ needed to make each individual file. (ok, could be more efficient doing this may
 some code, but wasn't terrible by hand)
 
 ### config file
+
+## running job
+
+```{bash}
+sbatch --array=1-2 scripts/purc_A.slurm
+sbatch scripts/purc_A.slurm
+```
