@@ -93,53 +93,36 @@ great, our partition is for `cpu-g2`.
 to test out getting an interactive node with 1 CPU, 10GB memory max, 2 hours
 `salloc --partition=cpu-g2 --cpus-per-task=1 --mem=10G --time=2:00:00`
 
-### Setting up a container on HYAK 
-
-actually: can do miniconda download & env setup instead of containerization.
-this isn't necessary below, but I'm keeping it just in case anyone
-wants these instructions later.
-
-dependencies needed for PURC 2.0: Python v.3+ and the PURC environment. Let's set up a Python container.
-
-following instructions from [here](https://hyak.uw.edu/docs/hyak101/containers/demonstration):
-
-```{bash}
-salloc --partition=cpu-g2 --cpus-per-task=1 --mem=10G --time=2:00:00
-cd /mmfs1/gscratch/scrubbed/laufran/basics
-apptainer pull docker://python:3.14.0-bookworm  # pull python 3.14 docker image
-apptainer shell python_3.14.0-bookworm.sif # open a shell inside the container where you can run Python
-python # open up our python instance
-```
-
-### Setting up conda env for PURC
-
-Doing this from the lab storage directory, as I might run out of storage in my home dir
-installing miniconda there.
-
-```{bash}
-cd /mmfs1/gscratch/tribblelab/laufran
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh # download miniconda
-bash Miniconda3-latest-Linux-x86_64.sh -p ./miniconda3 # set up miniconda in this dir
-```
-
-log out of the ssh session & restart so the `conda` call works:
-```{bash}
-cd /mmfs1/gscratch/tribblelab/laufran
-conda env create -n purc --file purc/purc_linux.yaml 
-# this will take a minute, it's downloading all the dependencies
-conda activate purc
-```
-
 to check on the amount of storage used, either in personal home directory 
 or in the lab directory, do: `hyakstorage`. 
 If you've recently deleted/added files, it updates every hour so might not be accurate. 
+Storage should hopefully be less of a concern now with the conda module available.
 
-### Setting up conda env for PacBio
+### Setting up conda envs for PURC + PacBio
+
+notably, as of December 2025, there's a conda module now available. I've since deleted 
+my prior miniconda set up in favor of this module, which should take up less storage
+and be less buggy. 
+
+to delete prior miniconda setup:
+```{bash}
+cd /mmfs1/gscratch/tribblelab/laufran/miniconda3
+./uninstall.sh
+```
+
+additionally, have to go to `~/.bashrc` and delete miniconda set up lines.
+
+```{bash}
+salloc --partition=cpu-g2 --cpus-per-task=1 --mem=10G --time=2:00:00
+module load conda
+cd /mmfs1/gscratch/tribblelab/laufran
+# this will take a minute, it's downloading all the dependencies
+conda env create -n purc --file purc/purc_linux.yaml 
+```
 
 There is a command to convert .bam --> .fasta,
 using tools supported by PacBio, as set up by a conda env.
 However, they require Python 2.7, not 3.X+ (as above)
-
 ```{bash}
 conda create -n pacbio python=2.7
 conda activate pacbio
