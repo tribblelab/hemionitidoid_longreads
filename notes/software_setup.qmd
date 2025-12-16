@@ -115,6 +115,18 @@ additionally, have to go to `~/.bashrc` and delete miniconda set up lines.
 ```{bash}
 salloc --partition=cpu-g2 --cpus-per-task=1 --mem=10G --time=2:00:00
 module load conda
+```
+
+now go to `~/.condarc`
+and add these lines:
+```
+envs_dirs:
+  - /gscratch/tribblelab/laufran/conda/envs
+pkgs_dirs:
+  - /gscratch/tribblelab/laufran/conda/pkgs
+```
+
+```{bash}
 cd /mmfs1/gscratch/tribblelab/laufran
 # this will take a minute, it's downloading all the dependencies
 conda env create -n purc --file purc/purc_linux.yaml 
