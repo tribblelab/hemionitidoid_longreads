@@ -1,15 +1,15 @@
 ***Important ones***
 [Files]
 Input_sequence_file		= PacBio_seq.fasta	    # Fasta file containing your sequencing reads
-in_Barcode_seq_file		= barcodes.fasta		# Fasta file containing barcode names and sequences; the input for making blast database
-in_RefSeq_seq_file		= reference.fasta	    # Fasta file containing reference names and sequences; the input for making blast database
+in_Barcode_seq_file		= /mmfs1/gscratch/tribblelab/hemionitidoid_longreads/input/barcodes.fasta		# Fasta file containing barcode names and sequences; the input for making blast database
+in_RefSeq_seq_file		= /mmfs1/gscratch/tribblelab/hemionitidoid_longreads/input/reference.fasta	    # Fasta file containing reference names and sequences; the input for making blast database
 Output_prefix			= poolA					# The prefix for output files
 Output_folder			= purc_poolA			# The folder in where all purc output will be saved
 Log_file				= log					# If left empty, default time-stamped log file name will be used
 
 [Loci]
 Locus_name				= matK, pgiC, APPEFP, CRY2, gapCpSh, SQD1, rpl2, psbM, infA, IBR3	# The order must be identical to that in Locus-barcode-taxon_map
-Locus-barcode-taxon_map	= mapfiles/matk_A.txt, mapfiles/pgic_A.txt, mapfiles/appepf_A.txt, mapfiles/cry2_A.txt, mapfiles/gap_A.txt, mapfiles/sqd1_A.txt, mapfiles/rpl2_A.txt, mapfiles/psbm_A.txt, mapfiles/infa_A.txt, mapfiles/ibr3_A.txt
+Locus-barcode-taxon_map	= input/mapfiles/matk_A.txt, input/mapfiles/pgic_A.txt, input/mapfiles/appepf_A.txt, input/mapfiles/cry2_A.txt, input/mapfiles/gap_A.txt, input/mapfiles/sqd1_A.txt, input/mapfiles/rpl2_A.txt, input/mapfiles/psbm_A.txt, input/mapfiles/infa_A.txt, input/mapfiles/ibr3_A.txt
 
 [Primers]
 Forward_primer			= GGAGTACAGTGGCAATCAAACG, CTCGACAACAGGTCACGGTGG, ATGAAATGCACAGYAGTCCAGG, GGAGCTCCCCTTGTCATGCG, CMGCRGATGCTCCAATGTTC, GTTCATTCTATCATCTTAGCAAAGTGCATG, GTATGACCCCAACCGCAATGC, GTTATTCCGAGCGGCTGTTTG, CTTATATAACTGCGTCAGATCCTTCCCG, ACCGAACCTGATGTCGCATC # 5'-3' Order must match locus_name and locus-barcode-taxon_map!
