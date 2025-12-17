@@ -2,7 +2,7 @@
 [Files]
 Input_sequence_file		= PacBio_seq.fasta	    # Fasta file containing your sequencing reads
 in_Barcode_seq_file		= /mmfs1/gscratch/tribblelab/hemionitidoid_longreads/input/barcodes.fasta		# Fasta file containing barcode names and sequences; the input for making blast database
-in_RefSeq_seq_file		= /mmfs1/gscratch/tribblelab/hemionitidoid_longreads/input/reference.fasta	    # Fasta file containing reference names and sequences; the input for making blast database
+in_RefSeq_seq_file		= /mmfs1/gscratch/tribblelab/hemionitidoid_longreads/input/fullrun/reference.fasta	    # Fasta file containing reference names and sequences; the input for making blast database
 Output_prefix			= poolA					# The prefix for output files
 Output_folder			= purc_poolA			# The folder in where all purc output will be saved
 Log_file				= log					# If left empty, default time-stamped log file name will be used
