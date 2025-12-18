@@ -36,7 +36,7 @@ BATCH_FOLDER="${BATCH_DIR_PARENT}/batch_${BATCH_NUM}"
 INPUT_FASTQ="${BATCH_FOLDER}/reads.fastq"
 
 # Output naming derived from batch
-OUT_PREFIX="output/dummyrun/poolA_b${BATCH_NUM}"
+OUT_PREFIX="poolA_b${BATCH_NUM}"
 OUT_DIR="output/dummyrun/purc_poolA_b${BATCH_NUM}"
 CONFIG_OUT="${BATCH_FOLDER}/purc_config_b${BATCH_NUM}.conf"
 
