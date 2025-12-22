@@ -1,3 +1,4 @@
+Sq_01   barcode01seq
 Sq_02	barcode02seq
 Sq_03	barcode03seq
 Sq_04	barcode04seq

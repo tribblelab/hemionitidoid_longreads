@@ -1,3 +1,4 @@
+Ga_01   barcode01seq
 Ga_02	barcode02seq
 Ga_03	barcode03seq
 Ga_04	barcode04seq

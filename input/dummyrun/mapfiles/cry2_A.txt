@@ -1,3 +1,4 @@
+Cr_01   barcode01seq
 Cr_02	barcode02seq
 Cr_03	barcode03seq
 Cr_04	barcode04seq
