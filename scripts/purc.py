@@ -931,7 +931,12 @@ def makeMapDict(mapping_file, locus, Multiplex_perBC_flag=True, DualBC_flag=Fals
         for each_rec in map:
             each_rec = each_rec.strip('\n')
             map_barcode_name = each_rec.split('\t')[0]
-            map_group_name = each_rec.split('\t')[1].upper()
+            parts = each_rec.rstrip().split('\t')
+            bad_annotation_lines = 0
+            if len(parts) < 2:
+                bad_annotation_lines += 1
+                continue
+            map_group_name = parts[1].upper()
             map_taxon_name = each_rec.split('\t')[2]
             key = map_barcode_name + '_' + map_group_name #BC01_A, BC01_B, BC010_C...
             MapDict[key] = map_taxon_name
@@ -954,6 +959,10 @@ def makeMapDict(mapping_file, locus, Multiplex_perBC_flag=True, DualBC_flag=Fals
             MapDict[key] = map_taxon_name
 
     map.close()
+    if bad_annotation_lines > 0:
+        sys.stderr.write(
+        f"[PURC WARNING] {bad_annotation_lines} malformed annotation lines skipped in {each_file}\n"
+        )
     return MapDict
 
 def annotateIt(filetoannotate, outFile, failsFile, Multiplex_perBC_flag=True, DualBC_flag=False, verbose_level=0):
