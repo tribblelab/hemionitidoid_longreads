@@ -1,4 +1,3 @@
-Ma_01   barcode01seq
 Ma_02	barcode02seq
 Ma_03	barcode03seq
 Ma_04	barcode04seq

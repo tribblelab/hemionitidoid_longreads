@@ -1,4 +1,3 @@
-Rp_01   barcode01seq
 Rp_02	barcode02seq
 Rp_03	barcode03seq
 Rp_04	barcode04seq

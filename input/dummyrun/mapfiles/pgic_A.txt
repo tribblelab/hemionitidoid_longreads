@@ -1,4 +1,3 @@
-Pg_01   barcode01seq
 Pg_02	barcode02seq
 Pg_03	barcode03seq
 Pg_04	barcode04seq

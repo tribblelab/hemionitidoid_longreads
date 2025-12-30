@@ -1,4 +1,3 @@
-Ib_01   barcode01seq
 Ib_02	barcode02seq
 Ib_03	barcode03seq
 Ib_04	barcode04seq
