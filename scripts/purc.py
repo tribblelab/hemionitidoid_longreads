@@ -612,8 +612,8 @@ def DeBarcoder_ends(SeqDict, databasefile, Output_folder, Output_prefix, search_
     bc_toomany = open(Output_folder + '/' + Output_prefix + '_1_trashBin_tooMany_bc.fa', 'w') # For saving those more than one barcode
 
     # Get 5' and 3' end sequences, the length of seq is determined by search_range
-    F_ends = open('tempF', 'w')
-    R_ends = open('tempR', 'w')
+    F_ends = open(Output_folder + '/tempF', 'w')
+    R_ends = open(Output_folder + '/tempR', 'w')
     for each_rec in sorted(SeqDict):
         seq_to_search_F = str(SeqDict[each_rec].seq)[:search_range]
         F_ends.write('>' + str(each_rec) + '\n' + seq_to_search_F + '\n')
@@ -623,8 +623,8 @@ def DeBarcoder_ends(SeqDict, databasefile, Output_folder, Output_prefix, search_
 
     F_ends.close()
     R_ends.close()
-    BlastSeq('tempF', Output_folder + '/blast_barcodeF_out.txt', databasefile, num_threads=num_threads, evalue=1, max_target=1, outfmt='6 qacc sacc length pident evalue qstart qend qlen')
-    BlastSeq('tempR', Output_folder + '/blast_barcodeR_out.txt', databasefile, num_threads=num_threads, evalue=1, max_target=1, outfmt='6 qacc sacc length pident evalue qstart qend qlen')
+    BlastSeq(Output_folder + '/tempF', Output_folder + '/blast_barcodeF_out.txt', databasefile, num_threads=num_threads, evalue=1, max_target=1, outfmt='6 qacc sacc length pident evalue qstart qend qlen')
+    BlastSeq(Output_folder + '/tempR', Output_folder + '/blast_barcodeR_out.txt', databasefile, num_threads=num_threads, evalue=1, max_target=1, outfmt='6 qacc sacc length pident evalue qstart qend qlen')
 
     seq_withbc_list = [] # A list containing all the seq names that have barcodes
     seq_withbc_morethanone_list = [] # A list containing all the seq names that have more than one barcode
@@ -684,8 +684,8 @@ def DeBarcoder_ends(SeqDict, databasefile, Output_folder, Output_prefix, search_
     for seq_withoutbc in seq_withoutbc_list:
         bc_leftover.write('>' + str(seq_withoutbc) + '\n' + str(SeqDict[seq_withoutbc].seq) + '\n')
 
-    os.remove('tempF')
-    os.remove('tempR')
+    os.remove(Output_folder + '/tempF')
+    os.remove(Output_folder + '/tempR')
     bc_blast_F.close()
     bc_blast_R.close()
     bc_toomany.close()
