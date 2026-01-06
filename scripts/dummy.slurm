@@ -10,7 +10,6 @@
 #SBATCH --mem=32G
 #SBATCH --time=24:00:00
 
-#SBATCH --array=1-2
 #SBATCH --chdir=/mmfs1/gscratch/tribblelab/hemionitidoid_longreads
 #SBATCH --export=ALL
 #SBATCH -o log/%x_%A_%a.out
@@ -31,13 +30,13 @@ PYTHON="/mmfs1/gscratch/tribblelab/laufran/purc/purc.py"
 # ------------------------------------------------------------
 
 # Get batch folder name based on SLURM_ARRAY_TASK_ID
-BATCH_NUM=$(printf "%03d" ${SLURM_ARRAY_TASK_ID})
-BATCH_FOLDER="${BATCH_DIR_PARENT}/batch_${BATCH_NUM}"
+BATCH_NUM=001
+BATCH_FOLDER="${BATCH_DIR_PARENT}/batch_001"
 INPUT_FASTQ="${BATCH_FOLDER}/reads.fastq"
 
 # Output naming derived from batch
-OUT_PREFIX="poolA_b${BATCH_NUM}"
-OUT_DIR="output/dummyrun/purc_poolA_b${BATCH_NUM}"
+OUT_PREFIX="poolA_b001"
+OUT_DIR="output/purc_poolA_b${BATCH_NUM}"
 CONFIG_OUT="${BATCH_FOLDER}/purc_config_b${BATCH_NUM}.conf"
 
 echo "Running PURC for batch ${BATCH_NUM}"
