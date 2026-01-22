@@ -1,95 +1,95 @@
-Ib_02	barcode02seq
-Ib_03	barcode03seq
-Ib_04	barcode04seq
-Ib_05	barcode05seq
-Ib_06	barcode06seq
-Ib_07	barcode07seq
-Ib_08	barcode08seq
-Ib_09	barcode09seq
-Ib_10	barcode10seq
-Ib_11	barcode11seq
-Ib_12	barcode12seq
-Ib_13	barcode13seq
-Ib_14	barcode14seq
-Ib_15	barcode15seq
-Ib_16	barcode16seq
-Ib_17	barcode17seq
-Ib_18	barcode18seq
-Ib_19	barcode19seq
-Ib_20	barcode20seq
-Ib_21	barcode21seq
-Ib_22	barcode22seq
-Ib_23	barcode23seq
-Ib_24	barcode24seq
-Ib_25	barcode25seq
-Ib_26	barcode26seq
-Ib_27	barcode27seq
-Ib_28	barcode28seq
-Ib_29	barcode29seq
-Ib_30	barcode30seq
-Ib_31	barcode31seq
-Ib_32	barcode32seq
-Ib_33	barcode33seq
-Ib_34	barcode34seq
-Ib_35	barcode35seq
-Ib_36	barcode36seq
-Ib_37	barcode37seq
-Ib_38	barcode38seq
-Ib_39	barcode39seq
-Ib_40	barcode40seq
-Ib_41	barcode41seq
-Ib_42	barcode42seq
-Ib_43	barcode43seq
-Ib_44	barcode44seq
-Ib_45	barcode45seq
-Ib_46	barcode46seq
-Ib_47	barcode47seq
-Ib_48	barcode48seq
-Ib_49	barcode49seq
-Ib_50	barcode50seq
-Ib_51	barcode51seq
-Ib_52	barcode52seq
-Ib_53	barcode53seq
-Ib_54	barcode54seq
-Ib_55	barcode55seq
-Ib_56	barcode56seq
-Ib_57	barcode57seq
-Ib_58	barcode58seq
-Ib_59	barcode59seq
-Ib_60	barcode60seq
-Ib_61	barcode61seq
-Ib_62	barcode62seq
-Ib_63	barcode63seq
-Ib_64	barcode64seq
-Ib_65	barcode65seq
-Ib_66	barcode66seq
-Ib_67	barcode67seq
-Ib_68	barcode68seq
-Ib_69	barcode69seq
-Ib_70	barcode70seq
-Ib_71	barcode71seq
-Ib_72	barcode72seq
-Ib_73	barcode73seq
-Ib_74	barcode74seq
-Ib_75	barcode75seq
-Ib_76	barcode76seq
-Ib_77	barcode77seq
-Ib_78	barcode78seq
-Ib_79	barcode79seq
-Ib_80	barcode80seq
-Ib_81	barcode81seq
-Ib_82	barcode82seq
-Ib_83	barcode83seq
-Ib_84	barcode84seq
-Ib_85	barcode85seq
-Ib_86	barcode86seq
-Ib_87	barcode87seq
-Ib_88	barcode88seq
-Ib_89	barcode89seq
-Ib_90	barcode90seq
-Ib_91	barcode91seq
-Ib_92	barcode92seq
-Ib_93	barcode93seq
-Ib_94	barcode94seq
-Ib_95	barcode95seq
-Ib_96	barcode96seq
+Ib_02	A	barcode02seq
+Ib_03	A	barcode03seq
+Ib_04	A	barcode04seq
+Ib_05	A	barcode05seq
+Ib_06	A	barcode06seq
+Ib_07	A	barcode07seq
+Ib_08	A	barcode08seq
+Ib_09	A	barcode09seq
+Ib_10	A	barcode10seq
+Ib_11	A	barcode11seq
+Ib_12	A	barcode12seq
+Ib_13	A	barcode13seq
+Ib_14	A	barcode14seq
+Ib_15	A	barcode15seq
+Ib_16	A	barcode16seq
+Ib_17	A	barcode17seq
+Ib_18	A	barcode18seq
+Ib_19	A	barcode19seq
+Ib_20	A	barcode20seq
+Ib_21	A	barcode21seq
+Ib_22	A	barcode22seq
+Ib_23	A	barcode23seq
+Ib_24	A	barcode24seq
+Ib_25	A	barcode25seq
+Ib_26	A	barcode26seq
+Ib_27	A	barcode27seq
+Ib_28	A	barcode28seq
+Ib_29	A	barcode29seq
+Ib_30	A	barcode30seq
+Ib_31	A	barcode31seq
+Ib_32	A	barcode32seq
+Ib_33	A	barcode33seq
+Ib_34	A	barcode34seq
+Ib_35	A	barcode35seq
+Ib_36	A	barcode36seq
+Ib_37	A	barcode37seq
+Ib_38	A	barcode38seq
+Ib_39	A	barcode39seq
+Ib_40	A	barcode40seq
+Ib_41	A	barcode41seq
+Ib_42	A	barcode42seq
+Ib_43	A	barcode43seq
+Ib_44	A	barcode44seq
+Ib_45	A	barcode45seq
+Ib_46	A	barcode46seq
+Ib_47	A	barcode47seq
+Ib_48	A	barcode48seq
+Ib_49	A	barcode49seq
+Ib_50	A	barcode50seq
+Ib_51	A	barcode51seq
+Ib_52	A	barcode52seq
+Ib_53	A	barcode53seq
+Ib_54	A	barcode54seq
+Ib_55	A	barcode55seq
+Ib_56	A	barcode56seq
+Ib_57	A	barcode57seq
+Ib_58	A	barcode58seq
+Ib_59	A	barcode59seq
+Ib_60	A	barcode60seq
+Ib_61	A	barcode61seq
+Ib_62	A	barcode62seq
+Ib_63	A	barcode63seq
+Ib_64	A	barcode64seq
+Ib_65	A	barcode65seq
+Ib_66	A	barcode66seq
+Ib_67	A	barcode67seq
+Ib_68	A	barcode68seq
+Ib_69	A	barcode69seq
+Ib_70	A	barcode70seq
+Ib_71	A	barcode71seq
+Ib_72	A	barcode72seq
+Ib_73	A	barcode73seq
+Ib_74	A	barcode74seq
+Ib_75	A	barcode75seq
+Ib_76	A	barcode76seq
+Ib_77	A	barcode77seq
+Ib_78	A	barcode78seq
+Ib_79	A	barcode79seq
+Ib_80	A	barcode80seq
+Ib_81	A	barcode81seq
+Ib_82	A	barcode82seq
+Ib_83	A	barcode83seq
+Ib_84	A	barcode84seq
+Ib_85	A	barcode85seq
+Ib_86	A	barcode86seq
+Ib_87	A	barcode87seq
+Ib_88	A	barcode88seq
+Ib_89	A	barcode89seq
+Ib_90	A	barcode90seq
+Ib_91	A	barcode91seq
+Ib_92	A	barcode92seq
+Ib_93	A	barcode93seq
+Ib_94	A	barcode94seq
+Ib_95	A	barcode95seq
+Ib_96	A	barcode96seq

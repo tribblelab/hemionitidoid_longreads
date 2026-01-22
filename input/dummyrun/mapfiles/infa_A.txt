@@ -1,95 +1,95 @@
-In_02	barcode02seq
-In_03	barcode03seq
-In_04	barcode04seq
-In_05	barcode05seq
-In_06	barcode06seq
-In_07	barcode07seq
-In_08	barcode08seq
-In_09	barcode09seq
-In_10	barcode10seq
-In_11	barcode11seq
-In_12	barcode12seq
-In_13	barcode13seq
-In_14	barcode14seq
-In_15	barcode15seq
-In_16	barcode16seq
-In_17	barcode17seq
-In_18	barcode18seq
-In_19	barcode19seq
-In_20	barcode20seq
-In_21	barcode21seq
-In_22	barcode22seq
-In_23	barcode23seq
-In_24	barcode24seq
-In_25	barcode25seq
-In_26	barcode26seq
-In_27	barcode27seq
-In_28	barcode28seq
-In_29	barcode29seq
-In_30	barcode30seq
-In_31	barcode31seq
-In_32	barcode32seq
-In_33	barcode33seq
-In_34	barcode34seq
-In_35	barcode35seq
-In_36	barcode36seq
-In_37	barcode37seq
-In_38	barcode38seq
-In_39	barcode39seq
-In_40	barcode40seq
-In_41	barcode41seq
-In_42	barcode42seq
-In_43	barcode43seq
-In_44	barcode44seq
-In_45	barcode45seq
-In_46	barcode46seq
-In_47	barcode47seq
-In_48	barcode48seq
-In_49	barcode49seq
-In_50	barcode50seq
-In_51	barcode51seq
-In_52	barcode52seq
-In_53	barcode53seq
-In_54	barcode54seq
-In_55	barcode55seq
-In_56	barcode56seq
-In_57	barcode57seq
-In_58	barcode58seq
-In_59	barcode59seq
-In_60	barcode60seq
-In_61	barcode61seq
-In_62	barcode62seq
-In_63	barcode63seq
-In_64	barcode64seq
-In_65	barcode65seq
-In_66	barcode66seq
-In_67	barcode67seq
-In_68	barcode68seq
-In_69	barcode69seq
-In_70	barcode70seq
-In_71	barcode71seq
-In_72	barcode72seq
-In_73	barcode73seq
-In_74	barcode74seq
-In_75	barcode75seq
-In_76	barcode76seq
-In_77	barcode77seq
-In_78	barcode78seq
-In_79	barcode79seq
-In_80	barcode80seq
-In_81	barcode81seq
-In_82	barcode82seq
-In_83	barcode83seq
-In_84	barcode84seq
-In_85	barcode85seq
-In_86	barcode86seq
-In_87	barcode87seq
-In_88	barcode88seq
-In_89	barcode89seq
-In_90	barcode90seq
-In_91	barcode91seq
-In_92	barcode92seq
-In_93	barcode93seq
-In_94	barcode94seq
-In_95	barcode95seq
-In_96	barcode96seq
+In_02	A	barcode02seq
+In_03	A	barcode03seq
+In_04	A	barcode04seq
+In_05	A	barcode05seq
+In_06	A	barcode06seq
+In_07	A	barcode07seq
+In_08	A	barcode08seq
+In_09	A	barcode09seq
+In_10	A	barcode10seq
+In_11	A	barcode11seq
+In_12	A	barcode12seq
+In_13	A	barcode13seq
+In_14	A	barcode14seq
+In_15	A	barcode15seq
+In_16	A	barcode16seq
+In_17	A	barcode17seq
+In_18	A	barcode18seq
+In_19	A	barcode19seq
+In_20	A	barcode20seq
+In_21	A	barcode21seq
+In_22	A	barcode22seq
+In_23	A	barcode23seq
+In_24	A	barcode24seq
+In_25	A	barcode25seq
+In_26	A	barcode26seq
+In_27	A	barcode27seq
+In_28	A	barcode28seq
+In_29	A	barcode29seq
+In_30	A	barcode30seq
+In_31	A	barcode31seq
+In_32	A	barcode32seq
+In_33	A	barcode33seq
+In_34	A	barcode34seq
+In_35	A	barcode35seq
+In_36	A	barcode36seq
+In_37	A	barcode37seq
+In_38	A	barcode38seq
+In_39	A	barcode39seq
+In_40	A	barcode40seq
+In_41	A	barcode41seq
+In_42	A	barcode42seq
+In_43	A	barcode43seq
+In_44	A	barcode44seq
+In_45	A	barcode45seq
+In_46	A	barcode46seq
+In_47	A	barcode47seq
+In_48	A	barcode48seq
+In_49	A	barcode49seq
+In_50	A	barcode50seq
+In_51	A	barcode51seq
+In_52	A	barcode52seq
+In_53	A	barcode53seq
+In_54	A	barcode54seq
+In_55	A	barcode55seq
+In_56	A	barcode56seq
+In_57	A	barcode57seq
+In_58	A	barcode58seq
+In_59	A	barcode59seq
+In_60	A	barcode60seq
+In_61	A	barcode61seq
+In_62	A	barcode62seq
+In_63	A	barcode63seq
+In_64	A	barcode64seq
+In_65	A	barcode65seq
+In_66	A	barcode66seq
+In_67	A	barcode67seq
+In_68	A	barcode68seq
+In_69	A	barcode69seq
+In_70	A	barcode70seq
+In_71	A	barcode71seq
+In_72	A	barcode72seq
+In_73	A	barcode73seq
+In_74	A	barcode74seq
+In_75	A	barcode75seq
+In_76	A	barcode76seq
+In_77	A	barcode77seq
+In_78	A	barcode78seq
+In_79	A	barcode79seq
+In_80	A	barcode80seq
+In_81	A	barcode81seq
+In_82	A	barcode82seq
+In_83	A	barcode83seq
+In_84	A	barcode84seq
+In_85	A	barcode85seq
+In_86	A	barcode86seq
+In_87	A	barcode87seq
+In_88	A	barcode88seq
+In_89	A	barcode89seq
+In_90	A	barcode90seq
+In_91	A	barcode91seq
+In_92	A	barcode92seq
+In_93	A	barcode93seq
+In_94	A	barcode94seq
+In_95	A	barcode95seq
+In_96	A	barcode96seq

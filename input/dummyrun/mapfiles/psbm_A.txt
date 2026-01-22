@@ -1,95 +1,95 @@
-Ps_02	barcode02seq
-Ps_03	barcode03seq
-Ps_04	barcode04seq
-Ps_05	barcode05seq
-Ps_06	barcode06seq
-Ps_07	barcode07seq
-Ps_08	barcode08seq
-Ps_09	barcode09seq
-Ps_10	barcode10seq
-Ps_11	barcode11seq
-Ps_12	barcode12seq
-Ps_13	barcode13seq
-Ps_14	barcode14seq
-Ps_15	barcode15seq
-Ps_16	barcode16seq
-Ps_17	barcode17seq
-Ps_18	barcode18seq
-Ps_19	barcode19seq
-Ps_20	barcode20seq
-Ps_21	barcode21seq
-Ps_22	barcode22seq
-Ps_23	barcode23seq
-Ps_24	barcode24seq
-Ps_25	barcode25seq
-Ps_26	barcode26seq
-Ps_27	barcode27seq
-Ps_28	barcode28seq
-Ps_29	barcode29seq
-Ps_30	barcode30seq
-Ps_31	barcode31seq
-Ps_32	barcode32seq
-Ps_33	barcode33seq
-Ps_34	barcode34seq
-Ps_35	barcode35seq
-Ps_36	barcode36seq
-Ps_37	barcode37seq
-Ps_38	barcode38seq
-Ps_39	barcode39seq
-Ps_40	barcode40seq
-Ps_41	barcode41seq
-Ps_42	barcode42seq
-Ps_43	barcode43seq
-Ps_44	barcode44seq
-Ps_45	barcode45seq
-Ps_46	barcode46seq
-Ps_47	barcode47seq
-Ps_48	barcode48seq
-Ps_49	barcode49seq
-Ps_50	barcode50seq
-Ps_51	barcode51seq
-Ps_52	barcode52seq
-Ps_53	barcode53seq
-Ps_54	barcode54seq
-Ps_55	barcode55seq
-Ps_56	barcode56seq
-Ps_57	barcode57seq
-Ps_58	barcode58seq
-Ps_59	barcode59seq
-Ps_60	barcode60seq
-Ps_61	barcode61seq
-Ps_62	barcode62seq
-Ps_63	barcode63seq
-Ps_64	barcode64seq
-Ps_65	barcode65seq
-Ps_66	barcode66seq
-Ps_67	barcode67seq
-Ps_68	barcode68seq
-Ps_69	barcode69seq
-Ps_70	barcode70seq
-Ps_71	barcode71seq
-Ps_72	barcode72seq
-Ps_73	barcode73seq
-Ps_74	barcode74seq
-Ps_75	barcode75seq
-Ps_76	barcode76seq
-Ps_77	barcode77seq
-Ps_78	barcode78seq
-Ps_79	barcode79seq
-Ps_80	barcode80seq
-Ps_81	barcode81seq
-Ps_82	barcode82seq
-Ps_83	barcode83seq
-Ps_84	barcode84seq
-Ps_85	barcode85seq
-Ps_86	barcode86seq
-Ps_87	barcode87seq
-Ps_88	barcode88seq
-Ps_89	barcode89seq
-Ps_90	barcode90seq
-Ps_91	barcode91seq
-Ps_92	barcode92seq
-Ps_93	barcode93seq
-Ps_94	barcode94seq
-Ps_95	barcode95seq
-Ps_96	barcode96seq
+Ps_02	A	barcode02seq
+Ps_03	A	barcode03seq
+Ps_04	A	barcode04seq
+Ps_05	A	barcode05seq
+Ps_06	A	barcode06seq
+Ps_07	A	barcode07seq
+Ps_08	A	barcode08seq
+Ps_09	A	barcode09seq
+Ps_10	A	barcode10seq
+Ps_11	A	barcode11seq
+Ps_12	A	barcode12seq
+Ps_13	A	barcode13seq
+Ps_14	A	barcode14seq
+Ps_15	A	barcode15seq
+Ps_16	A	barcode16seq
+Ps_17	A	barcode17seq
+Ps_18	A	barcode18seq
+Ps_19	A	barcode19seq
+Ps_20	A	barcode20seq
+Ps_21	A	barcode21seq
+Ps_22	A	barcode22seq
+Ps_23	A	barcode23seq
+Ps_24	A	barcode24seq
+Ps_25	A	barcode25seq
+Ps_26	A	barcode26seq
+Ps_27	A	barcode27seq
+Ps_28	A	barcode28seq
+Ps_29	A	barcode29seq
+Ps_30	A	barcode30seq
+Ps_31	A	barcode31seq
+Ps_32	A	barcode32seq
+Ps_33	A	barcode33seq
+Ps_34	A	barcode34seq
+Ps_35	A	barcode35seq
+Ps_36	A	barcode36seq
+Ps_37	A	barcode37seq
+Ps_38	A	barcode38seq
+Ps_39	A	barcode39seq
+Ps_40	A	barcode40seq
+Ps_41	A	barcode41seq
+Ps_42	A	barcode42seq
+Ps_43	A	barcode43seq
+Ps_44	A	barcode44seq
+Ps_45	A	barcode45seq
+Ps_46	A	barcode46seq
+Ps_47	A	barcode47seq
+Ps_48	A	barcode48seq
+Ps_49	A	barcode49seq
+Ps_50	A	barcode50seq
+Ps_51	A	barcode51seq
+Ps_52	A	barcode52seq
+Ps_53	A	barcode53seq
+Ps_54	A	barcode54seq
+Ps_55	A	barcode55seq
+Ps_56	A	barcode56seq
+Ps_57	A	barcode57seq
+Ps_58	A	barcode58seq
+Ps_59	A	barcode59seq
+Ps_60	A	barcode60seq
+Ps_61	A	barcode61seq
+Ps_62	A	barcode62seq
+Ps_63	A	barcode63seq
+Ps_64	A	barcode64seq
+Ps_65	A	barcode65seq
+Ps_66	A	barcode66seq
+Ps_67	A	barcode67seq
+Ps_68	A	barcode68seq
+Ps_69	A	barcode69seq
+Ps_70	A	barcode70seq
+Ps_71	A	barcode71seq
+Ps_72	A	barcode72seq
+Ps_73	A	barcode73seq
+Ps_74	A	barcode74seq
+Ps_75	A	barcode75seq
+Ps_76	A	barcode76seq
+Ps_77	A	barcode77seq
+Ps_78	A	barcode78seq
+Ps_79	A	barcode79seq
+Ps_80	A	barcode80seq
+Ps_81	A	barcode81seq
+Ps_82	A	barcode82seq
+Ps_83	A	barcode83seq
+Ps_84	A	barcode84seq
+Ps_85	A	barcode85seq
+Ps_86	A	barcode86seq
+Ps_87	A	barcode87seq
+Ps_88	A	barcode88seq
+Ps_89	A	barcode89seq
+Ps_90	A	barcode90seq
+Ps_91	A	barcode91seq
+Ps_92	A	barcode92seq
+Ps_93	A	barcode93seq
+Ps_94	A	barcode94seq
+Ps_95	A	barcode95seq
+Ps_96	A	barcode96seq

@@ -1,95 +1,95 @@
-Ap_02	barcode02seq
-Ap_03	barcode03seq
-Ap_04	barcode04seq
-Ap_05	barcode05seq
-Ap_06	barcode06seq
-Ap_07	barcode07seq
-Ap_08	barcode08seq
-Ap_09	barcode09seq
-Ap_10	barcode10seq
-Ap_11	barcode11seq
-Ap_12	barcode12seq
-Ap_13	barcode13seq
-Ap_14	barcode14seq
-Ap_15	barcode15seq
-Ap_16	barcode16seq
-Ap_17	barcode17seq
-Ap_18	barcode18seq
-Ap_19	barcode19seq
-Ap_20	barcode20seq
-Ap_21	barcode21seq
-Ap_22	barcode22seq
-Ap_23	barcode23seq
-Ap_24	barcode24seq
-Ap_25	barcode25seq
-Ap_26	barcode26seq
-Ap_27	barcode27seq
-Ap_28	barcode28seq
-Ap_29	barcode29seq
-Ap_30	barcode30seq
-Ap_31	barcode31seq
-Ap_32	barcode32seq
-Ap_33	barcode33seq
-Ap_34	barcode34seq
-Ap_35	barcode35seq
-Ap_36	barcode36seq
-Ap_37	barcode37seq
-Ap_38	barcode38seq
-Ap_39	barcode39seq
-Ap_40	barcode40seq
-Ap_41	barcode41seq
-Ap_42	barcode42seq
-Ap_43	barcode43seq
-Ap_44	barcode44seq
-Ap_45	barcode45seq
-Ap_46	barcode46seq
-Ap_47	barcode47seq
-Ap_48	barcode48seq
-Ap_49	barcode49seq
-Ap_50	barcode50seq
-Ap_51	barcode51seq
-Ap_52	barcode52seq
-Ap_53	barcode53seq
-Ap_54	barcode54seq
-Ap_55	barcode55seq
-Ap_56	barcode56seq
-Ap_57	barcode57seq
-Ap_58	barcode58seq
-Ap_59	barcode59seq
-Ap_60	barcode60seq
-Ap_61	barcode61seq
-Ap_62	barcode62seq
-Ap_63	barcode63seq
-Ap_64	barcode64seq
-Ap_65	barcode65seq
-Ap_66	barcode66seq
-Ap_67	barcode67seq
-Ap_68	barcode68seq
-Ap_69	barcode69seq
-Ap_70	barcode70seq
-Ap_71	barcode71seq
-Ap_72	barcode72seq
-Ap_73	barcode73seq
-Ap_74	barcode74seq
-Ap_75	barcode75seq
-Ap_76	barcode76seq
-Ap_77	barcode77seq
-Ap_78	barcode78seq
-Ap_79	barcode79seq
-Ap_80	barcode80seq
-Ap_81	barcode81seq
-Ap_82	barcode82seq
-Ap_83	barcode83seq
-Ap_84	barcode84seq
-Ap_85	barcode85seq
-Ap_86	barcode86seq
-Ap_87	barcode87seq
-Ap_88	barcode88seq
-Ap_89	barcode89seq
-Ap_90	barcode90seq
-Ap_91	barcode91seq
-Ap_92	barcode92seq
-Ap_93	barcode93seq
-Ap_94	barcode94seq
-Ap_95	barcode95seq
-Ap_96	barcode96seq
+Ap_02	A	barcode02seq
+Ap_03	A	barcode03seq
+Ap_04	A	barcode04seq
+Ap_05	A	barcode05seq
+Ap_06	A	barcode06seq
+Ap_07	A	barcode07seq
+Ap_08	A	barcode08seq
+Ap_09	A	barcode09seq
+Ap_10	A	barcode10seq
+Ap_11	A	barcode11seq
+Ap_12	A	barcode12seq
+Ap_13	A	barcode13seq
+Ap_14	A	barcode14seq
+Ap_15	A	barcode15seq
+Ap_16	A	barcode16seq
+Ap_17	A	barcode17seq
+Ap_18	A	barcode18seq
+Ap_19	A	barcode19seq
+Ap_20	A	barcode20seq
+Ap_21	A	barcode21seq
+Ap_22	A	barcode22seq
+Ap_23	A	barcode23seq
+Ap_24	A	barcode24seq
+Ap_25	A	barcode25seq
+Ap_26	A	barcode26seq
+Ap_27	A	barcode27seq
+Ap_28	A	barcode28seq
+Ap_29	A	barcode29seq
+Ap_30	A	barcode30seq
+Ap_31	A	barcode31seq
+Ap_32	A	barcode32seq
+Ap_33	A	barcode33seq
+Ap_34	A	barcode34seq
+Ap_35	A	barcode35seq
+Ap_36	A	barcode36seq
+Ap_37	A	barcode37seq
+Ap_38	A	barcode38seq
+Ap_39	A	barcode39seq
+Ap_40	A	barcode40seq
+Ap_41	A	barcode41seq
+Ap_42	A	barcode42seq
+Ap_43	A	barcode43seq
+Ap_44	A	barcode44seq
+Ap_45	A	barcode45seq
+Ap_46	A	barcode46seq
+Ap_47	A	barcode47seq
+Ap_48	A	barcode48seq
+Ap_49	A	barcode49seq
+Ap_50	A	barcode50seq
+Ap_51	A	barcode51seq
+Ap_52	A	barcode52seq
+Ap_53	A	barcode53seq
+Ap_54	A	barcode54seq
+Ap_55	A	barcode55seq
+Ap_56	A	barcode56seq
+Ap_57	A	barcode57seq
+Ap_58	A	barcode58seq
+Ap_59	A	barcode59seq
+Ap_60	A	barcode60seq
+Ap_61	A	barcode61seq
+Ap_62	A	barcode62seq
+Ap_63	A	barcode63seq
+Ap_64	A	barcode64seq
+Ap_65	A	barcode65seq
+Ap_66	A	barcode66seq
+Ap_67	A	barcode67seq
+Ap_68	A	barcode68seq
+Ap_69	A	barcode69seq
+Ap_70	A	barcode70seq
+Ap_71	A	barcode71seq
+Ap_72	A	barcode72seq
+Ap_73	A	barcode73seq
+Ap_74	A	barcode74seq
+Ap_75	A	barcode75seq
+Ap_76	A	barcode76seq
+Ap_77	A	barcode77seq
+Ap_78	A	barcode78seq
+Ap_79	A	barcode79seq
+Ap_80	A	barcode80seq
+Ap_81	A	barcode81seq
+Ap_82	A	barcode82seq
+Ap_83	A	barcode83seq
+Ap_84	A	barcode84seq
+Ap_85	A	barcode85seq
+Ap_86	A	barcode86seq
+Ap_87	A	barcode87seq
+Ap_88	A	barcode88seq
+Ap_89	A	barcode89seq
+Ap_90	A	barcode90seq
+Ap_91	A	barcode91seq
+Ap_92	A	barcode92seq
+Ap_93	A	barcode93seq
+Ap_94	A	barcode94seq
+Ap_95	A	barcode95seq
+Ap_96	A	barcode96seq
