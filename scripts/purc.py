@@ -996,11 +996,11 @@ def annotateIt(filetoannotate, outFile, failsFile, Multiplex_perBC_flag=True, Du
         # Get the key for retrieving taxon_name in dictOfMapDicts[locus_name]
         if Multiplex_perBC_flag:
             try:
-                group_name = re.search('GROUP=(\w)/', refseq_name, re.IGNORECASE).group(1)
+                group_name = re.search('GROUP=([^/]+)/', refseq_name, re.IGNORECASE).group(1)
             except:
                 sys.exit('ERROR in parsing group annotations in the reference sequences; should be in the format of >locus=X/group=XY/ref_taxon=XYZ')
             try:
-                locus_name = re.search('LOCUS=(\w+)/', refseq_name, re.IGNORECASE).group(1) # The names are in the format "locus=X/group=XY/ref_taxon=XYZ"
+                locus_name = re.search('LOCUS=([^/]+)/', refseq_name, re.IGNORECASE).group(1) # The names are in the format "locus=X/group=XY/ref_taxon=XYZ"
             except:
                 sys.exit('ERROR in parsing locus annotations in the reference sequences; should be in the format of >locus=X/group=XY/ref_taxon=XYZ')
             key = seq_name.split('|')[0] + '_' + group_name # Grabbing the barcode from the source seq, and the group from the matching ref seq.
