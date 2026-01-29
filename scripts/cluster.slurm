@@ -10,7 +10,7 @@
 #SBATCH --mem=64G                     # Increased memory for heavy chimeric checking
 #SBATCH --time=48:00:00
 
-#SBATCH --array=0-8
+#SBATCH --array=0-8                   # will need to add more (1? 2?) when I have appefp
 #SBATCH --chdir=/mmfs1/gscratch/tribblelab/hemionitidoid_longreads
 #SBATCH --export=ALL
 #SBATCH -o log/%x_%A_%a.out
@@ -19,6 +19,7 @@ module load conda
 conda activate purc
 
 PROJECT_ROOT="/mmfs1/gscratch/tribblelab/hemionitidoid_longreads"
+#fixit: will need to change this path below depending on the run
 BATCH_DIR_PARENT="${PROJECT_ROOT}/output/dummyrun/purc_poolA_b001"
 PYTHON_SCRIPT="${PROJECT_ROOT}/scripts/purc_recluster.py"
 
@@ -38,6 +39,7 @@ LOCI=(
 LOCUS="${LOCI[$SLURM_ARRAY_TASK_ID]}"
 
 echo "Reclustering locus: ${LOCUS}"
+cd "${BATCH_DIR_PARENT}"
 
 python ${PYTHON_SCRIPT} \
   -f "${BATCH_DIR_PARENT}/${LOCUS}/${LOCUS}.fa" \
