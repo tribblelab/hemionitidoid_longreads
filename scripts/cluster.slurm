@@ -42,8 +42,8 @@ echo "Reclustering locus: ${LOCUS}"
 cd "${BATCH_DIR_PARENT}"
 
 python ${PYTHON_SCRIPT} \
-  -f "${BATCH_DIR_PARENT}/${LOCUS}/${LOCUS}.fa" \
-  -o "${BATCH_DIR_PARENT}/${LOCUS}/${LOCUS}_recluster" \
+  -f "${LOCUS}/${LOCUS}.fa" \
+  -o "${LOCUS}/${LOCUS}_recluster" \
   -c 0.997 0.995 0.99 0.997 \
   -s 1 4 \
   --clean \
