@@ -18,68 +18,22 @@ PURC:
 
 to do list:
 [] send pics of weird alignments to slack
-[] make a dummy run -->
-  [] new config
-  [] new bash script
-  [] new reference file
-  [] new map
 
 ### sequence data
 
-to start, we need to convert our .bam files from PacBio to .fastq.
+to start, we need to convert our CLS data to CCS. 
+we'll run `scripts/ccsconv.slurm` to do this.
+
+next, we need to convert our .bam files from PacBio to .fastq.
 (.fasta is also acceptable, but can't do ASV stuff with .fasta)
 
-in the `/mmfs1/gscratch/tribblelab/hemionitidoid_longreads` dir:
-
-```{bash}
-salloc --partition=cpu-g2 --cpus-per-task=1 --mem=10G --time=5:00:00
-conda activate pacbio
-bam2fastq -o pentpoolA m64044_221017_183110.subreads.demux.pentpoolA--pentpoolA.bam
-bam2fastq -o pentpoolB m64044_221017_183110.subreads.demux.pentpoolB--pentpoolB.bam
-```
+to do so, run: [`scripts/bamtofastq.slurm`](`bamtofastq.slurm`)
 
 While the command only uses the .bam file as an argument, you will also need the .bam.pbi index file 
 for this command to run.
 
-Note: I ran this initially on an interactive node, but it timed out.
-Instead, ran as a slurm job via [`scripts/bamtofastq.slurm`](`bamtofastq.slurm`)
-
 The bam2fastq conversion results in a .gz compressed file. I uncompressed using
 via [`scripts/gzdecompression.slurm`](`gzdecompression.slurm`)
-
-but my files are too huge, I'll have to split into batches of 2 million reads each:
-```{bash}
-input="pentpoolA.fastq"
-parent="poolafastq"
-mkdir -p "$parent"
-
-# Split FASTQ into batches of 2M reads (8M lines)
-awk -v parent="$parent" '
-BEGIN { batch_size = 8000000 }  # 2 million reads × 4 lines
-{
-    file_num = int((NR-1)/batch_size) + 1
-    folder = sprintf("%s/batch_%03d", parent, file_num)
-    fname = folder "/reads.fastq"
-
-    # Create folder at the first line of the batch
-    if (NR % batch_size == 1) {
-        system("mkdir -p " folder)
-    }
-
-    print >> fname
-}
-' "$input"
-
-# Only delete input if AWK succeeded
-if [ $? -eq 0 ]; then
-    echo "Splitting complete. Deleting input FASTQ..."
-    rm -f "$input"
-else
-    echo "Error occurred; input file was NOT deleted."
-fi
-```
-
-fixit: will eventually have to do for pool B.
 
 ### barcode file
 
@@ -138,7 +92,7 @@ fixits from this file:
 [] check alignments in geneious to make sure sequences are mostly of similar length/overlap
 
 problems:
-  1. appefp-c: poor alignment, check the reverse complements?
+  1. APPEFP: poor alignment, check the reverse complements?
   2. cry2: replacing Dory (available on NCBI) for Gaga, since our Dory samples didn't amplify cry2 at all. but the Pent cry2 ref sequence is proving a small problem.. from the sanger data, none of the forward primers seemed to work well. and reverse primers give maybe ~500bp/2,000bp, which is better than nothing.
   3. gapcpsh: big deletions / gaps between pent/noth vs. myri/parahemionitis ?
   7. pgic: beautiful alignment, just need to add in penta

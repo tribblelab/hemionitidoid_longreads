@@ -134,10 +134,11 @@ conda env create -n purc --file purc/purc_linux.yaml
 
 There is a command to convert .bam --> .fasta,
 using tools supported by PacBio, as set up by a conda env.
+Let's also add the package for ccs conversion (`pbccs`).
 However, they require Python 2.7, not 3.X+ (as above)
 ```{bash}
 conda create -n pacbio python=2.7
 conda activate pacbio
 conda install -c bioconda pbtk
-conda install -c bioconda actc
+conda install -c bioconda pbccs
 ```
