@@ -1,15 +1,15 @@
 ***Important ones***
 [Files]
-Input_sequence_file		= PacBio_seq.fasta	    # Fasta file containing your sequencing reads
+Input_sequence_file		= poolX.ccs.fastq	    # Fasta file containing your sequencing reads
 in_Barcode_seq_file		= /mmfs1/gscratch/tribblelab/hemionitidoid_longreads/input/barcodes.fasta		# Fasta file containing barcode names and sequences; the input for making blast database
 in_RefSeq_seq_file		= /mmfs1/gscratch/tribblelab/hemionitidoid_longreads/input/dummyrun/reference.fasta	    # Fasta file containing reference names and sequences; the input for making blast database
-Output_prefix			= poolA					# The prefix for output files
-Output_folder			= purc_poolA			# The folder in where all purc output will be saved
+Output_prefix			= poolX					# The prefix for output files
+Output_folder			= purc_poolX			# The folder in where all purc output will be saved
 Log_file				= log					# If left empty, default time-stamped log file name will be used
 
 [Loci]
 Locus_name				= matK, pgiC, APPEFP, CRY2, gapCpSh, SQD1, rpl2, psbM, infA, IBR3	# The order must be identical to that in Locus-barcode-taxon_map
-Locus-barcode-taxon_map	= /mmfs1/gscratch/tribblelab/hemionitidoid_longreads/input/dummyrun/mapfiles/matk_A.txt, /mmfs1/gscratch/tribblelab/hemionitidoid_longreads/input/dummyrun/mapfiles/pgic_A.txt, /mmfs1/gscratch/tribblelab/hemionitidoid_longreads/input/dummyrun/mapfiles/appepf_A.txt, /mmfs1/gscratch/tribblelab/hemionitidoid_longreads/input/dummyrun/mapfiles/cry2_A.txt, /mmfs1/gscratch/tribblelab/hemionitidoid_longreads/input/dummyrun/mapfiles/gap_A.txt, /mmfs1/gscratch/tribblelab/hemionitidoid_longreads/input/dummyrun/mapfiles/sqd1_A.txt, /mmfs1/gscratch/tribblelab/hemionitidoid_longreads/input/dummyrun/mapfiles/rpl2_A.txt, /mmfs1/gscratch/tribblelab/hemionitidoid_longreads/input/dummyrun/mapfiles/psbm_A.txt, /mmfs1/gscratch/tribblelab/hemionitidoid_longreads/input/dummyrun/mapfiles/infa_A.txt, /mmfs1/gscratch/tribblelab/hemionitidoid_longreads/input/dummyrun/mapfiles/ibr3_A.txt
+Locus-barcode-taxon_map	= /mmfs1/gscratch/tribblelab/hemionitidoid_longreads/input/dummyrun/mapfiles/matk.txt, /mmfs1/gscratch/tribblelab/hemionitidoid_longreads/input/dummyrun/mapfiles/pgic.txt, /mmfs1/gscratch/tribblelab/hemionitidoid_longreads/input/dummyrun/mapfiles/appepf.txt, /mmfs1/gscratch/tribblelab/hemionitidoid_longreads/input/dummyrun/mapfiles/cry2.txt, /mmfs1/gscratch/tribblelab/hemionitidoid_longreads/input/dummyrun/mapfiles/gap.txt, /mmfs1/gscratch/tribblelab/hemionitidoid_longreads/input/dummyrun/mapfiles/sqd1.txt, /mmfs1/gscratch/tribblelab/hemionitidoid_longreads/input/dummyrun/mapfiles/rpl2.txt, /mmfs1/gscratch/tribblelab/hemionitidoid_longreads/input/dummyrun/mapfiles/psbm.txt, /mmfs1/gscratch/tribblelab/hemionitidoid_longreads/input/dummyrun/mapfiles/infa.txt, /mmfs1/gscratch/tribblelab/hemionitidoid_longreads/input/dummyrun/mapfiles/ibr3.txt
 
 [Primers]
 Forward_primer			= GGAGTACAGTGGCAATCAAACG, CTCGACAACAGGTCACGGTGG, ATGAAATGCACAGYAGTCCAGG, GGAGCTCCCCTTGTCATGCG, CMGCRGATGCTCCAATGTTC, GTTCATTCTATCATCTTAGCAAAGTGCATG, GTATGACCCCAACCGCAATGC, GTTATTCCGAGCGGCTGTTTG, CTTATATAACTGCGTCAGATCCTTCCCG, ACCGAACCTGATGTCGCATC # 5'-3' Order must match locus_name and locus-barcode-taxon_map!
