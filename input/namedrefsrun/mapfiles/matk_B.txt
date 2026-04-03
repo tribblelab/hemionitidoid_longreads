@@ -70,7 +70,7 @@ Ma_36	N	CR258_Notholaena_aschenborniana
 Ma_36	P	KMW114_Pentagramma_triangularis
 Ma_37	N	CR90_Notholaena_californica
 Ma_37	P	KMW121_Pentagramma_pallida
-Ma_38	H	CR53_Hemionitis_leucopoda
+Ma_38	H	CR53_Cheilanthes_leucopoda
 Ma_38	P	KMW122_Pentagramma_triangularis
 Ma_39	N	CR85_Notholaena_standleyi
 Ma_39	P	KMW123_Pentagramma_rebmanii
@@ -78,7 +78,7 @@ Ma_40	M	CR144_Paragymnopteris_bipinnata
 Ma_40	P	KMW124_Pentagramma_triangularis
 Ma_41	M	CR163_Pellaea_ternifolia
 Ma_41	P	KMW125_Pentagramma_triangularis
-Ma_42	H	CR690_Hemionitis_lozanoi
+Ma_42	Y	CR690_Ynesmexia_seemannii
 Ma_42	P	KMW126_Pentagramma_maxonii
 Ma_43	P	KMW127_Pentagramma_rebmanii
 Ma_44	P	KMW128_Pentagramma_maxonii

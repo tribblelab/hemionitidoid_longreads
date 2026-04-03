@@ -70,7 +70,7 @@ Ap_36	N	CR258_Notholaena_aschenborniana
 Ap_36	P	ES306_Pentagramma_viscosa
 Ap_37	N	CR90_Notholaena_californica
 Ap_37	P	ES307_Pentagramma_triangularis
-Ap_38	H	CR53_Hemionitis_leucopoda
+Ap_38	H	CR53_Cheilanthes_leucopoda
 Ap_38	P	ES308_Pentagramma_triangularis
 Ap_39	N	CR85_Notholaena_standleyi
 Ap_39	P	ES309_Pentagramma_triangularis
@@ -78,7 +78,7 @@ Ap_40	M	CR144_Paragymnopteris_bipinnata
 Ap_40	P	ES310_Pentagramma_triangularis
 Ap_41	M	CR163_Pellaea_ternifolia
 Ap_41	P	ES312_Pentagramma_maxonii
-Ap_42	H	CR690_Hemionitis_lozanoi
+Ap_42	Y	CR690_Ynesmexia_seemannii
 Ap_42	P	ES313_Pentagramma_triangularis
 Ap_43	P	ES314_Pentagramma_glanduloviscida
 Ap_44	P	ES315_Pentagramma_maxonii
