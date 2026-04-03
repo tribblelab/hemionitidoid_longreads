@@ -23,8 +23,9 @@ PROJECT_ROOT="/mmfs1/gscratch/tribblelab/hemionitidoid_longreads"
 BATCH_DIR_PARENT="${PROJECT_ROOT}/output/dummyrun/purc_poolA_b001"
 PYTHON_SCRIPT="${PROJECT_ROOT}/scripts/purc_recluster.py"
 
-#locus list (fixit: need to add APPEFP eventually)
+#locus list
 LOCI=(
+  APPEFP
   CRY2
   GAPCPSH
   IBR3
