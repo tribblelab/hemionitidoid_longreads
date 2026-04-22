@@ -52,7 +52,7 @@ Ap_27	Adi	    CR105_Adiantopsis_seemannii
 Ap_27	Pent	ES296_Pentagramma_triangularis
 Ap_28	Ale	    CR46_Aleuritopteris_farinosa
 Ap_28	Pent	ES298_Pentagramma_triangularis
-Ap_29	Gaga	CR106_Gaga_harrisii
+Ap_29	Ale	CR106_Gaga_harrisii
 Ap_29	Pent	ES299_Pentagramma_semipallida
 Ap_30	Ale	    CR146_Aleuritopteris_acrostica
 Ap_30	Pent	ES300_Pentagramma_rebmanii

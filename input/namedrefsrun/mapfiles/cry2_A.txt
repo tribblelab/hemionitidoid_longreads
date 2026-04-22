@@ -25,11 +25,11 @@ Cr_25	Pent	ES294_Pentagramma_triangularis
 Cr_26	Pent	ES295_Pentagramma_triangularis
 Cr_27	Adi	CR105_Adiantopsis_seemannii
 Cr_27	Pent	ES296_Pentagramma_triangularis
-Cr_28	Ale	CR46_Aleuritopteris_farinosa
+Cr_28	Che	CR46_Aleuritopteris_farinosa
 Cr_28	Pent	ES298_Pentagramma_triangularis
 Cr_29	Gaga	CR106_Gaga_harrisii
 Cr_29	Pent	ES299_Pentagramma_semipallida
-Cr_30	Ale	CR146_Aleuritopteris_acrostica
+Cr_30	Che	CR146_Aleuritopteris_acrostica
 Cr_30	Pent	ES300_Pentagramma_rebmanii
 Cr_31	Myr	CR717_Myriopteris_rufa
 Cr_31	Pent	ES301_Pentagramma_triangularis
