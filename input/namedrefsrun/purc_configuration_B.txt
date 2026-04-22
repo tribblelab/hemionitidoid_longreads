@@ -8,8 +8,8 @@ Output_folder			= purc_poolB			# The folder in where all purc output will be sav
 Log_file				= log					# If left empty, default time-stamped log file name will be used
 
 [Loci]
-Locus_name				= matK, pgiC, APPEFP, CRY2, gapCpSh, SQD1, rpl2, psbM, infA, IBR3	# The order must be identical to that in Locus-barcode-taxon_map
-Locus-barcode-taxon_map	= input/namedrefsrun/mapfiles/matk_B.txt, input/namedrefsrun/mapfiles/pgic_B.txt, input/namedrefsrun/mapfiles/appepf_B.txt, input/namedrefsrun/mapfiles/cry2_B.txt, input/namedrefsrun/mapfiles/gap_B.txt, input/namedrefsrun/mapfiles/sqd1_B.txt, input/namedrefsrun/mapfiles/rpl2_B.txt, input/namedrefsrun/mapfiles/psbm_B.txt, input/namedrefsrun/mapfiles/infa_B.txt, input/namedrefsrun/mapfiles/ibr3_B.txt
+Locus_name				= matk, pgic, appefp, cry2, gapcpsh, sqd1, rpl2, psbm, infa, ibr3	# The order must be identical to that in Locus-barcode-taxon_map
+Locus-barcode-taxon_map	= input/namedrefsrun/mapfiles/matk_B.txt, input/namedrefsrun/mapfiles/pgic_B.txt, input/namedrefsrun/mapfiles/appepf_B.txt, input/namedrefsrun/mapfiles/cry2_B.txt, input/namedrefsrun/mapfiles/gapcpsh_B.txt, input/namedrefsrun/mapfiles/sqd1_B.txt, input/namedrefsrun/mapfiles/rpl2_B.txt, input/namedrefsrun/mapfiles/psbm_B.txt, input/namedrefsrun/mapfiles/infa_B.txt, input/namedrefsrun/mapfiles/ibr3_B.txt
 
 [Primers]
 Forward_primer			= GGAGTACAGTGGCAATCAAACG, CTCGACAACAGGTCACGGTGG, ATGAAATGCACAGYAGTCCAGG, GGAGCTCCCCTTGTCATGCG, CMGCRGATGCTCCAATGTTC, GTTCATTCTATCATCTTAGCAAAGTGCATG, GTATGACCCCAACCGCAATGC, GTTATTCCGAGCGGCTGTTTG, CTTATATAACTGCGTCAGATCCTTCCCG, ACCGAACCTGATGTCGCATC # 5'-3' Order must match locus_name and locus-barcode-taxon_map!
