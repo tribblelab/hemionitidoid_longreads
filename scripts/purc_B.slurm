@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=purc_poolA
+#SBATCH --job-name=purc_poolB
 #SBATCH --partition=cpu-g2
 #SBATCH --account=tribblelab
 #SBATCH --nodes=1
@@ -18,7 +18,7 @@ conda activate purc
 # ------------------------------------------------------------
 # User settings
 # ------------------------------------------------------------
-BASE_CONFIG="/mmfs1/gscratch/tribblelab/hemionitidoid_longreads/input/namedrefsrun/purc_configuration_A.txt"
+BASE_CONFIG="/mmfs1/gscratch/tribblelab/hemionitidoid_longreads/input/namedrefsrun/purc_configuration_B.txt"
 PROJECT_ROOT="/mmfs1/gscratch/tribblelab/hemionitidoid_longreads"
 OUTPUT_ROOT="${PROJECT_ROOT}/output"
 PYTHON="${PROJECT_ROOT}/../laufran/purc/purc.py"
@@ -26,10 +26,10 @@ PYTHON="${PROJECT_ROOT}/../laufran/purc/purc.py"
 # ------------------------------------------------------------
 # CCS input file
 # ------------------------------------------------------------
-INPUT_FASTQ="${PROJECT_ROOT}/input/poolA.ccs.fastq"
-OUT_PREFIX="poolA"
-OUT_DIR="${OUTPUT_ROOT}/purc_poolA"
-CONFIG_OUT="${PROJECT_ROOT}/input/purc_config_poolA.conf"
+INPUT_FASTQ="${PROJECT_ROOT}/input/poolB.ccs.fastq"
+OUT_PREFIX="poolB"
+OUT_DIR="${OUTPUT_ROOT}/purc_poolB"
+CONFIG_OUT="${PROJECT_ROOT}/input/purc_config_poolB.conf"
 
 echo "Running PURC on CCS reads"
 echo "Input FASTQ: ${INPUT_FASTQ}"
