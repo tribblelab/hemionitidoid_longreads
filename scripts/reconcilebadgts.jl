@@ -186,7 +186,7 @@ Priority:
   1. Ynesmexia
   2. Myriopteris
   3. Pellaea or Paragymnopteris
-  4. Notholaena or Cheiloplecton
+  4. Notholaena, Cheiloplecton, or Cheilanthes leucopoda
   5. Base of the Pentagramma clade (tip in sister group — single-tip fallback)
 
 Returns a symbol indicating which strategy was used.
@@ -204,7 +204,7 @@ function root_gene_tree!(t::HybridNetwork)::Symbol
         (["Ynesmexia"], :ynesmexia),
         (["Myriopteris"], :myriopteris),
         (["Pellaea", "Paragymnopteris"], :pellaea_paragymnopteris),
-        (["Notholaena", "Cheiloplecton"], :notholaena_cheiloplecton),
+        (["Notholaena", "Cheiloplecton", "Cheilanthes"], :notholaena_cheiloplecton),
         (["Gaga", "Aleuritopteris", "Adiantopsis"], :otherhems)
     ]
 
@@ -283,6 +283,51 @@ function penta_tips_external_to_main_clade(t::HybridNetwork;
     all_penta = [n.name for n in t.node if n.leaf && is_pentagramma(n.name)]
     external = filter(tip -> tip ∉ main_tips, all_penta)
     return external
+end
+
+"""
+    rename_external_tips_to_poolC!(t::HybridNetwork,
+                                   external_tips::Vector{String},
+                                   pool::String, gene::String,
+                                   bt::BarcodeTable)
+
+Modify the tree `t` in-place by renaming the tips in `external_tips` (the output of
+`penta_tips_external_to_main_clade`) to their pool C `purc_id` counterparts.
+
+Arguments:
+- `t`             : the `HybridNetwork` tree to modify
+- `external_tips` : tip labels returned by `penta_tips_external_to_main_clade`
+- `pool`          : `"A"` or `"B"` — which pool the gene tree came from
+- `gene`          : gene name matching the tree filename stem, e.g. `"APPEFP"`
+- `bt`            : `BarcodeTable` loaded with `load_barcode_table`
+
+When no pool C match exists for a tip, a warning is emitted and its label remains unchanged.
+"""
+function rename_external_tips_to_poolC!(t::HybridNetwork,
+    external_tips::Vector{String},
+    pool::String, gene::String,
+    bt::BarcodeTable)
+    id_counts = Dict{String,Int}()
+    for tip in external_tips
+        poolC_id = find_poolC_match(tip, pool, gene, bt)
+        if poolC_id === nothing
+            @warn "No pool C match found for tip '$(strip_tip_suffixes(tip))' " *
+                  "(pool $pool, gene $gene) — keeping original label"
+        else
+            count = get(id_counts, poolC_id, 0) + 1
+            id_counts[poolC_id] = count
+            new_name = "$(poolC_id)_$(count)"
+
+            # Find the node in the tree and rename it
+            for n in t.node
+                if n.leaf && n.name == tip
+                    n.name = new_name
+                    break
+                end
+            end
+        end
+    end
+    return t
 end
 
 # ---------------------------------------------------------------------------
@@ -887,3 +932,16 @@ open(REF_FASTA, "a") do io
 end
 
 println("\nAppended $(length(all_refs)) reference entr$(length(all_refs) == 1 ? "y" : "ies") to $REF_FASTA")
+
+sqd1 = readnewick("output/genetrees/poolA/SQD1/SQD1.tre")
+appefp = readnewick("output/genetrees/poolB/APPEFP/APPEFP.tre")
+root_gene_tree!(sqd1)
+root_gene_tree!(appefp)
+
+sqd1_external = penta_tips_external_to_main_clade(sqd1)
+rename_external_tips_to_poolC!(sqd1, sqd1_external, "A", "SQD1", bt)
+writenewick(sqd1, "output/genetrees/poolA/SQD1/SQD1_clean.tre")
+
+appefp_external = penta_tips_external_to_main_clade(appefp)
+rename_external_tips_to_poolC!(appefp, appefp_external, "B", "APPEFP", bt)
+writenewick(appefp, "output/genetrees/poolB/APPEFP/APPEFP_clean.tre")
