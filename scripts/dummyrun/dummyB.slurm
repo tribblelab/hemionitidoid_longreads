@@ -47,6 +47,7 @@ sed -i "s|^Input_sequence_file.*|Input_sequence_file = ${INPUT_FASTQ}|" "${CONFI
 sed -i "s|^Output_prefix.*|Output_prefix = ${OUT_PREFIX}|" "${CONFIG_OUT}"
 sed -i "s|^Output_folder.*|Output_folder = ${OUT_DIR}|" "${CONFIG_OUT}"
 sed -i "s|^Log_file.*|Log_file = log_poolB_ccs|" "${CONFIG_OUT}"
+sed -i "s|input/namedrefsrun/mapfiles/|${PROJECT_ROOT}/input/namedrefsrun/mapfiles/|g" "${CONFIG_OUT}"
 
 # ------------------------------------------------------------
 # Run PURC
