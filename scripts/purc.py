@@ -357,7 +357,9 @@ def BlastSeq(inputfile, outputfile, databasefile, num_threads=1, evalue=0.000000
     (out, err) =proc.communicate()
     if int(out.strip("\n")) == 0:
         print("ERROR: BLAST output is empty.\n\tInput file: %s\n\tSearch database: %s\n\tOutput file: %s\n" %(inputfile, databasefile, outputfile))
-        print("If input file is correct, check that BLAST database was created correctly.")
+        sys.stdout.flush()
+        log.write("ERROR: BLAST output is empty. Input: %s DB: %s Out: %s\n" % (inputfile, databasefile, outputfile))
+        log.flush()
         sys.exit(1)
     return
 
@@ -968,95 +970,110 @@ def makeMapDict(mapping_file, locus, Multiplex_perBC_flag=True, DualBC_flag=Fals
 def annotateIt(filetoannotate, outFile, failsFile, Multiplex_perBC_flag=True, DualBC_flag=False, verbose_level=0):
     """Uses the blast results (against the reference sequence database) to assign locus and taxon, and write sequences
     for a particular locus as specified by map_locus; returns a dictionary containing taxon-locus seq counts"""
+    print("DEBUG: entering annotateIt() on %s" % filetoannotate); sys.stdout.flush()
+    log.write("DEBUG: entering annotateIt() on %s\n" % filetoannotate); log.flush()
+    
+    try:
+        # Blasts each sequence in the input file (e.g., BC01.fa) against the reference sequences
+        BlastSeq(filetoannotate, Output_folder + '/blast_refseq_out.txt', BLAST_DBs_folder + '/' + refseq_databasefile, num_threads=num_threads, evalue=0.0000001, max_target=1, outfmt='6 qacc sacc length pident evalue qstart qend qlen')
+        print("DEBUG: BlastSeq for annotation finished for %s" % filetoannotate); sys.stdout.flush()
 
-    # Blasts each sequence in the input file (e.g., BC01.fa) against the reference sequences
-    BlastSeq(filetoannotate, Output_folder + '/blast_refseq_out.txt', BLAST_DBs_folder + '/' + refseq_databasefile, num_threads=num_threads, evalue=0.0000001, max_target=1, outfmt='6 qacc sacc length pident evalue qstart qend qlen')
+        # Reads the  sequences as a dict
+        SeqDict = SeqIO.index(filetoannotate, 'fasta')
+        print("DEBUG: SeqDict indexed, %d sequences" % len(SeqDict)); sys.stdout.flush()
 
-    # Reads the  sequences as a dict
-    SeqDict = SeqIO.index(filetoannotate, 'fasta')
+        # Using blast matches to the reference sequences, and barcode <-> taxon mapping files, to assign
+        # each seq to a particular locus and taxon
+        dictOfMapDicts = {} # A dictionary to store all of the map dictionaries
+        for each_file, each_locus in zip(mapping_file_list, locus_list):
+            dictOfMapDicts[each_locus.upper()] = makeMapDict(each_file, each_locus, Multiplex_perBC_flag, DualBC_flag) # Note the Multiplex_perBC and DualBC flags (as True/False)
 
-    # Using blast matches to the reference sequences, and barcode <-> taxon mapping files, to assign
-    # each seq to a particular locus and taxon
-    dictOfMapDicts = {} # A dictionary to store all of the map dictionaries
-    for each_file, each_locus in zip(mapping_file_list, locus_list):
-        dictOfMapDicts[each_locus.upper()] = makeMapDict(each_file, each_locus, Multiplex_perBC_flag, DualBC_flag) # Note the Multiplex_perBC and DualBC flags (as True/False)
+        refseq_blast = open(Output_folder + '/blast_refseq_out.txt', 'r')
+        annotated_seqs = open(outFile, "w")
+        no_matches = open(failsFile, "w")
+        groupsList = []
+        locusList = []
+        LocusTaxonCountDict = {}
+        seq_processed_list = []
+        line_count = 0
+        for each_rec in refseq_blast:
+            line_count += 1
+            if line_count % 500 == 0:
+                print("DEBUG: processed %d blast lines" % line_count); sys.stdout.flush()
+            each_rec = each_rec.strip('\n')
+            seq_name = each_rec.split('\t')[0] # The un-annotated sequence name, e.g., "BC02|m131213_174801_42153_c100618932550000001823119607181400_s1_p0/282/ccs;ee=7.2;"
+            refseq_name = each_rec.split('\t')[1].replace(' ','').upper() # The best-hit reference sequence name, e.g., "locus=PGI/group=C/ref_taxon=C_diapA_BC17" ##Need to change this format
 
-    refseq_blast = open(Output_folder + '/blast_refseq_out.txt', 'r')
-    annotated_seqs = open(outFile, "w")
-    no_matches = open(failsFile, "w")
-    groupsList = []
-    locusList = []
-    LocusTaxonCountDict = {}
-    seq_processed_list = []
-    for each_rec in refseq_blast:
-        each_rec = each_rec.strip('\n')
-        seq_name = each_rec.split('\t')[0] # The un-annotated sequence name, e.g., "BC02|m131213_174801_42153_c100618932550000001823119607181400_s1_p0/282/ccs;ee=7.2;"
-        refseq_name = each_rec.split('\t')[1].replace(' ','').upper() # The best-hit reference sequence name, e.g., "locus=PGI/group=C/ref_taxon=C_diapA_BC17" ##Need to change this format
-
-        # Get the key for retrieving taxon_name in dictOfMapDicts[locus_name]
-        if Multiplex_perBC_flag:
-            try:
-                group_name = re.search('GROUP=([^/]+)/', refseq_name, re.IGNORECASE).group(1)
-            except:
-                sys.exit('ERROR in parsing group annotations in the reference sequences; should be in the format of >locus=X/group=XY/ref_taxon=XYZ')
-            try:
-                locus_name = re.search('LOCUS=([^/]+)/', refseq_name, re.IGNORECASE).group(1) # The names are in the format "locus=X/group=XY/ref_taxon=XYZ"
-            except:
-                sys.exit('ERROR in parsing locus annotations in the reference sequences; should be in the format of >locus=X/group=XY/ref_taxon=XYZ')
-            key = seq_name.split('|')[0] + '_' + group_name # Grabbing the barcode from the source seq, and the group from the matching ref seq.
-            #i.e., gets the unique identifier that can link to a specific sample; i.e. BC01_A, BC01_B, BC01_C...
-            if not group_name in groupsList: #keeping track of which groups are found, as a way of potentially diagnosing errors
-                groupsList.append(group_name)
-            if not locus_name in locusList: #keeping track of which loci are found, as a way of potentially diagnosing errors
-                locusList.append(locus_name)
-        else:
-            try:
-                locus_name = re.search('LOCUS=(\w+)/', refseq_name, re.IGNORECASE).group(1)
-                if not locus_name in locusList:
-                    locusList.append(locus_name)
-                #i.e., gets the unique barcode that can link to a specific sample; i.e. BC01, BC02, BC03...
-            except:
-                sys.exit('ERROR in parsing locus annotations in the reference sequences; should be in the format of >locus=X/group=XY/ref_taxon=XYZ')
-            key = seq_name.split('|')[0]
-        try: #use try/except to avoid the error when the key is not present in MapDict
-            taxon_name = dictOfMapDicts[locus_name][key]
-            #getting to the dict corresponding to this locus, and then finding that taxon that matches the barcode+group (the key)
-
+            # Get the key for retrieving taxon_name in dictOfMapDicts[locus_name]
             if Multiplex_perBC_flag:
-                new_seq_name = taxon_name + '|' + locus_name + '|' + group_name + '|' + seq_name.replace(seq_name_toErase, '')
-            else:
-                new_seq_name = taxon_name + '|' + locus_name + '|' + seq_name.replace(seq_name_toErase, '')
-
-            if seq_name not in seq_processed_list:
-                annotated_seqs.write('>' + new_seq_name + '\n' + str(SeqDict[seq_name].seq) + '\n')
                 try:
-                    LocusTaxonCountDict[taxon_name, locus_name] += 1 #as {('C_mem_6732', 'PGI'): 2, ('C_mem_6732', 'IBR'): 4} for example
+                    group_name = re.search('GROUP=([^/]+)/', refseq_name, re.IGNORECASE).group(1)
                 except:
-                    LocusTaxonCountDict[taxon_name, locus_name] = 1 #initiate the key and give count = 1
-                seq_processed_list.append(seq_name)
-        except:
-            log.write("\tThe combo '" + str(key) + "' wasn't found in " + str(locus_name) + '\n')
-            if Multiplex_perBC_flag:
-                new_seq_name = locus_name + '|' + group_name + '|' + seq_name.replace(seq_name_toErase, '')
+                    sys.exit('ERROR in parsing group annotations in the reference sequences; should be in the format of >locus=X/group=XY/ref_taxon=XYZ')
+                try:
+                    locus_name = re.search('LOCUS=([^/]+)/', refseq_name, re.IGNORECASE).group(1) # The names are in the format "locus=X/group=XY/ref_taxon=XYZ"
+                except:
+                    sys.exit('ERROR in parsing locus annotations in the reference sequences; should be in the format of >locus=X/group=XY/ref_taxon=XYZ')
+                key = seq_name.split('|')[0] + '_' + group_name # Grabbing the barcode from the source seq, and the group from the matching ref seq.
+                #i.e., gets the unique identifier that can link to a specific sample; i.e. BC01_A, BC01_B, BC01_C...
+                if not group_name in groupsList: #keeping track of which groups are found, as a way of potentially diagnosing errors
+                    groupsList.append(group_name)
+                if not locus_name in locusList: #keeping track of which loci are found, as a way of potentially diagnosing errors
+                    locusList.append(locus_name)
             else:
-                new_seq_name = locus_name + '|' + seq_name.replace(seq_name_toErase, '')
-            if seq_name not in seq_processed_list:
-                no_matches.write('>' + new_seq_name + '\n' + str(SeqDict[seq_name].seq) + '\n')
-                seq_processed_list.append(seq_name)
-            continue
+                try:
+                    locus_name = re.search('LOCUS=(\w+)/', refseq_name, re.IGNORECASE).group(1)
+                    if not locus_name in locusList:
+                        locusList.append(locus_name)
+                    #i.e., gets the unique barcode that can link to a specific sample; i.e. BC01, BC02, BC03...
+                except:
+                    sys.exit('ERROR in parsing locus annotations in the reference sequences; should be in the format of >locus=X/group=XY/ref_taxon=XYZ')
+                key = seq_name.split('|')[0]
+            try: #use try/except to avoid the error when the key is not present in MapDict
+                taxon_name = dictOfMapDicts[locus_name][key]
+                #getting to the dict corresponding to this locus, and then finding that taxon that matches the barcode+group (the key)
 
-    seq_no_hit = list(set(SeqDict.keys()) - set(seq_processed_list))
-    log.write("\tThere are " + str(len(seq_no_hit)) + " sequences that failed to match any of the reference sequences -- these are likely contaminants and added to the 'unclassifiable' output fasta file\n")
-    for each_rec in seq_no_hit:
-        no_matches.write('>' + each_rec + '\n' + str(SeqDict[each_rec].seq) + '\n')
+                if Multiplex_perBC_flag:
+                    new_seq_name = taxon_name + '|' + locus_name + '|' + group_name + '|' + seq_name.replace(seq_name_toErase, '')
+                else:
+                    new_seq_name = taxon_name + '|' + locus_name + '|' + seq_name.replace(seq_name_toErase, '')
 
-    refseq_blast.close()
-    annotated_seqs.close()
-    no_matches.close()
+                if seq_name not in seq_processed_list:
+                    annotated_seqs.write('>' + new_seq_name + '\n' + str(SeqDict[seq_name].seq) + '\n')
+                    try:
+                        LocusTaxonCountDict[taxon_name, locus_name] += 1 #as {('C_mem_6732', 'PGI'): 2, ('C_mem_6732', 'IBR'): 4} for example
+                    except:
+                        LocusTaxonCountDict[taxon_name, locus_name] = 1 #initiate the key and give count = 1
+                    seq_processed_list.append(seq_name)
+            except:
+                log.write("\tThe combo '" + str(key) + "' wasn't found in " + str(locus_name) + '\n')
+                if Multiplex_perBC_flag:
+                    new_seq_name = locus_name + '|' + group_name + '|' + seq_name.replace(seq_name_toErase, '')
+                else:
+                    new_seq_name = locus_name + '|' + seq_name.replace(seq_name_toErase, '')
+                if seq_name not in seq_processed_list:
+                    no_matches.write('>' + new_seq_name + '\n' + str(SeqDict[seq_name].seq) + '\n')
+                    seq_processed_list.append(seq_name)
+                continue
 
-    if verbose_level in [1, 2]:
-        log.write("The groups found are " + ', '.join(groupsList) + "\nAnd the loci found are " + ', '.join(locusList) + "\n")
-    return LocusTaxonCountDict #as {('C_mem_6732', 'PGI'): 2, ('C_mem_6732', 'IBR'): 4} for example
+        seq_no_hit = list(set(SeqDict.keys()) - set(seq_processed_list))
+        log.write("\tThere are " + str(len(seq_no_hit)) + " sequences that failed to match any of the reference sequences -- these are likely contaminants and added to the 'unclassifiable' output fasta file\n")
+        for each_rec in seq_no_hit:
+            no_matches.write('>' + each_rec + '\n' + str(SeqDict[each_rec].seq) + '\n')
+
+        refseq_blast.close()
+        annotated_seqs.close()
+        no_matches.close()
+
+        if verbose_level in [1, 2]:
+            log.write("The groups found are " + ', '.join(groupsList) + "\nAnd the loci found are " + ', '.join(locusList) + "\n")
+        return LocusTaxonCountDict #as {('C_mem_6732', 'PGI'): 2, ('C_mem_6732', 'IBR'): 4} for example
+    except Exception as e:
+        import traceback
+        print("EXCEPTION in annotateIt: %s" % e); sys.stdout.flush()
+        traceback.print_exc()
+        sys.stdout.flush()
+        raise
 
 def sortIt_length(file, verbose_level=0):
     log.write("sortIt_length")
