@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=purc_poolA
+#SBATCH --job-name=purc_ccs_poolA
 #SBATCH --partition=cpu-g2
 #SBATCH --account=tribblelab
 #SBATCH --nodes=1
@@ -18,7 +18,7 @@ conda activate purc
 # ------------------------------------------------------------
 # User settings
 # ------------------------------------------------------------
-BASE_CONFIG="/mmfs1/gscratch/tribblelab/hemionitidoid_longreads/input/namedrefsrun/purc_configuration_A.txt"
+BASE_CONFIG="/mmfs1/gscratch/tribblelab/hemionitidoid_longreads/input/dummyrun/purc_configuration.txt"
 PROJECT_ROOT="/mmfs1/gscratch/tribblelab/hemionitidoid_longreads"
 OUTPUT_ROOT="${PROJECT_ROOT}/output"
 PYTHON="${PROJECT_ROOT}/../laufran/purc/purc.py"
@@ -26,10 +26,10 @@ PYTHON="${PROJECT_ROOT}/../laufran/purc/purc.py"
 # ------------------------------------------------------------
 # CCS input file
 # ------------------------------------------------------------
-INPUT_FASTQ="${PROJECT_ROOT}/input/poolA.ccs.fastq"
-OUT_PREFIX="poolA"
-OUT_DIR="${OUTPUT_ROOT}/purc_poolA"
-CONFIG_OUT="${PROJECT_ROOT}/input/purc_config_poolA.conf"
+INPUT_FASTQ="${PROJECT_ROOT}/input/poolB.ccs.fastq"
+OUT_PREFIX="poolB_ccs"
+OUT_DIR="${OUTPUT_ROOT}/purc_poolB_ccs"
+CONFIG_OUT="${PROJECT_ROOT}/input/purc_config_poolB_ccs.conf"
 
 echo "Running PURC on CCS reads"
 echo "Input FASTQ: ${INPUT_FASTQ}"
@@ -46,7 +46,8 @@ cp "${BASE_CONFIG}" "${CONFIG_OUT}"
 sed -i "s|^Input_sequence_file.*|Input_sequence_file = ${INPUT_FASTQ}|" "${CONFIG_OUT}"
 sed -i "s|^Output_prefix.*|Output_prefix = ${OUT_PREFIX}|" "${CONFIG_OUT}"
 sed -i "s|^Output_folder.*|Output_folder = ${OUT_DIR}|" "${CONFIG_OUT}"
-sed -i "s|^Log_file.*|Log_file = log_poolA_ccs|" "${CONFIG_OUT}"
+sed -i "s|^Log_file.*|Log_file = log_poolB_ccs|" "${CONFIG_OUT}"
+sed -i "s|input/namedrefsrun/mapfiles/|${PROJECT_ROOT}/input/namedrefsrun/mapfiles/|g" "${CONFIG_OUT}"
 
 # ------------------------------------------------------------
 # Run PURC

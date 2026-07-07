@@ -933,10 +933,19 @@ end
 
 println("\nAppended $(length(all_refs)) reference entr$(length(all_refs) == 1 ? "y" : "ies") to $REF_FASTA")
 
+for (root, dirs, files) in walkdir("output/genetrees")
+    for file in files
+        if endswith(file, ".tre") && !occursin("clean", file)
+            path = joinpath(root, file)
+            t = readnewick(path)
+            root_gene_tree!(t)
+            writenewick(t, path)
+        end
+    end
+end
+
 sqd1 = readnewick("output/genetrees/poolA/SQD1/SQD1.tre")
 appefp = readnewick("output/genetrees/poolB/APPEFP/APPEFP.tre")
-root_gene_tree!(sqd1)
-root_gene_tree!(appefp)
 
 sqd1_external = penta_tips_external_to_main_clade(sqd1)
 rename_external_tips_to_poolC!(sqd1, sqd1_external, "A", "SQD1", bt)
