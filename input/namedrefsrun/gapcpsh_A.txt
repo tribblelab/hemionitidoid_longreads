@@ -12,7 +12,7 @@ Locus_name				=  gapcpsh	# The order must be identical to that in Locus-barcode-
 Locus-barcode-taxon_map	= input/namedrefsrun/mapfiles/gapcpsh_A.txt
 
 [Primers]
-Forward_primer			= CAGCAGATGCTCCAATGTTC # 5'-3' Order must match locus_name and locus-barcode-taxon_map!
+Forward_primer			= CMGCRGATGCTCCAATGTTC # 5'-3' Order must match locus_name and locus-barcode-taxon_map!
 Reverse_primer			= CCACAAAGTCGTTCGACACG # 5'-3' Order must match locus_name and locus-barcode-taxon_map!
 
 ***Setting up PURC run***
