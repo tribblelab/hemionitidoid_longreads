@@ -718,7 +718,7 @@ Arguments:
 - `sequence`    : nucleotide string (gaps removed before writing)
 - `locus`       : gene name to embed, e.g. `"APPEFP"` (lowercased automatically)
 - `genus_map`   : `Dict{String,String}` mapping genus → refgroup,
-                  as loaded from `notes/genustorefmap.csv`
+                  as loaded from `input/genustorefmap.csv`
 - `max_header_len` : maximum total header length including `>` (default 50)
  
 Returns a two-line `String` of the form `">header\\nsequence"`.
@@ -771,7 +771,7 @@ end
 """
     load_genus_map(csv_path::String) -> Dict{String,String}
  
-Parse `notes/genustorefmap.csv` into a `Dict` mapping genus → refgroup.
+Parse `input/genustorefmap.csv` into a `Dict` mapping genus → refgroup.
 """
 function load_genus_map(csv_path::String)::Dict{String,String}
     d = Dict{String,String}()
@@ -868,7 +868,7 @@ end
 rename_treefile_to_tre("output/genetrees")
 
 bt = load_barcode_table("input/barcode_to_samples.csv")
-gmap = load_genus_map("notes/genustorefmap.csv")
+gmap = load_genus_map("input/genustorefmap.csv")
 
 results_A = process_gene_tree_dir("output/genetrees/poolA/", "A"; bt=bt, genus_map=gmap)
 results_B = process_gene_tree_dir("output/genetrees/poolB/", "B"; bt=bt, genus_map=gmap)
