@@ -1,0 +1,105 @@
+---
+title: "homologizer"
+output: github_document
+date: 2026-11-04
+---
+
+# Phasing polyploid gene copies with homologizer
+
+[homologizer](https://github.com/wf8/homologizer) (Freyman et al.) runs in RevBayes:
+it jointly infers one tree and the assignment of each polyploid gene copy to a subgenome (mul-tree tip).
+Scripts live in `scripts/homologizer/`. Run everything from the project root.
+
+## 1. Pull OTU alignments from Hyak
+
+```{bash}
+./scripts/homologizer/sync_hyak.sh pull
+```
+
+Pulls `output/june3/purc_pool{A,B}/<LOCUS>/<LOCUS>_recluster/<LOCUS>_OTUs.aligned.fa`
+(and the non-reclustered `<LOCUS>_OTUs.aligned.fa`, used as a fallback, e.g. GAPCPSH)
+into `output/homologizer/raw/`. Change `RUN_NAME` in the script for a different run.
+
+## 2. Pick taxa, realign
+
+```{bash}
+julia --project=. scripts/homologizer/prep_homologizer.jl
+```
+
+The first run writes `input/homologizer/taxa.csv` from the sampling sheet:
+
+- `include`: pre-set to `yes` for pools A/B with ploidy 2/3/4. Trim this, because runtime scales with the number of tips.
+- `n_copies`: subgenomes (mul-tree tips) per sample: diploid 1, tetraploid 2, triploid 3.
+
+Rerun the script after editing. For every locus it:
+
+1. keeps the top `n_copies` OTUs by read size (size >= `MIN_SIZE`, default 10) per sample;
+   plastid loci keep only the top OTU
+2. names diploids `<purc_id>` and polyploid copies `<code>_copy1..k`
+3. realigns pools A + B together with MAFFT and writes `output/homologizer/aln/<LOCUS>.fa`
+   (aligned FASTA; RevBayes reads it directly, no NEXUS conversion needed)
+4. writes the Rev snippets in `output/homologizer/rev/` (initial phase, phasing moves)
+
+Check `output/homologizer/copy_summary.csv` to see which OTU each copy name is per locus.
+
+Notes on the model:
+
+- Missing polyploid copies become `<code>_BLANK<n>` (all `?`), so the phaser can still put them on a tip.
+- Plastid loci get no phasing moves. Their single copy stays fixed on tip `_A`, so **tip A = maternal subgenome**.
+- All loci (including plastid) share one tree, the standard homologizer assumption.
+
+## 3. Run locally
+
+```{bash}
+conda create -n revbayes -c conda-forge -c bioconda revbayes
+conda activate revbayes
+mkdir -p log
+nohup ./scripts/homologizer/run_homologizer.sh 2 > log/homologizer.out 2>&1 &
+```
+
+The `conda create` line only needs to run once.
+This runs 2 independent replicates in parallel (run id = seed) to `output/homologizer/mcmc/run<N>.*`,
+with each run's screen output in `log/homologizer_run<N>.out`. Pass a different number for more replicates;
+each one uses a single core. `nohup` keeps the runs going if the terminal closes.
+Generations and sample frequency are set at the top of `homologizer.Rev`.
+Test run (146 samples / 182 tips / 9 loci): about 0.6 s per generation.
+
+### Test run on a small subset
+
+To check the pipeline before the full run, trim `taxa.csv` to 18 samples (23 tips):
+the 2 diploids with the most OTUs per species, 3 tetraploids (including the viscosa × triangularis hybrid KMW043), and 1 triploid.
+The full template is backed up to `taxa_full.csv` first.
+
+```{bash}
+cp input/homologizer/taxa.csv input/homologizer/taxa_full.csv
+TEST="KMW147 KMW023 KMW078 ES315 KMW008 KMW166 KMW134 KMW049 KMW188 KMW143 ES288 KMW148 ES304 ES281 KMW129 KMW122 KMW043 KMW191"
+awk -F, -v OFS=, -v t="$TEST" 'BEGIN{n=split(t,a," "); for(i=1;i<=n;i++) k[a[i]]=1}
+NR==1{print; next} {split($1,p,"_"); $5 = (p[1] in k) ? "yes" : "no"; print}' \
+  input/homologizer/taxa_full.csv > input/homologizer/taxa.csv
+
+julia --project=. scripts/homologizer/prep_homologizer.jl
+conda activate revbayes
+./scripts/homologizer/run_homologizer.sh 1 200
+nohup ./scripts/homologizer/run_homologizer.sh 2 > log/homologizer.out 2>&1 &
+```
+
+The first `run_homologizer.sh` call is a smoke test (1 run, 200 generations, a few seconds);
+the second is the real test (2 runs, 50,000 generations, about 15 min).
+The second argument to `run_homologizer.sh` overrides `n_gen`. The subset runs at about 0.015 s per generation.
+To go back to the full sample set, restore the template and rerun the prep script:
+
+```{bash}
+cp input/homologizer/taxa_full.csv input/homologizer/taxa.csv
+```
+
+## 4. Results
+
+Output is in `output/homologizer/mcmc/`:
+
+- `run<N>.log`: check convergence in Tracer, and compare the two runs
+- `run<N>_<LOCUS>_phase.log`: copy assigned to each tip per sample. Summarize with burn-in removed.
+- `run<N>_map.tree`: unrooted, so root it before plotting.
+  Plot phasing with homologizer's `src/plot_phase.R`.
+
+To test homeologs vs alleles for a sample (e.g. 2 vs 3 tips), set `bayes_factors = TRUE`
+and compare stepping-stone marginal likelihoods between `taxa.csv` versions.
